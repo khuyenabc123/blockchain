@@ -1,0 +1,46 @@
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[
+        node distance=3cm,
+        box/.style={
+            draw,
+            rounded corners,
+            minimum width=4cm,
+            minimum height=1cm,
+            align=center
+        },
+        smallbox/.style={
+            draw,
+            rounded corners,
+            minimum width=6cm,
+            align=left
+        },
+        arrow/.style={
+            ->,
+            thick
+        }
+    ]
+    
+    % Main nodes
+    \node[box] (token) {Smart Contract State\\[2mm] Token ID: 8};
+    
+    \node[box, right=5cm of token] (uri)
+    {\texttt{tokenURI()}\\[2mm]
+    \texttt{ipfs://QmVjbUUY...4bs}};
+    
+    % Metadata
+    \node[smallbox, below=2cm of uri] (meta)
+    {
+    \textbf{Immutable JSON Metadata}\\[2mm]
+    studentName: ``Huynh Thi Luu''\\
+    fileHash: ``18d367c6e4f03b02...''
+    };
+    
+    % Arrows
+    \draw[arrow] (token) -- (uri);
+    \draw[arrow] (uri) -- (meta);
+    
+    \end{tikzpicture}
+    \caption{Retrieval of Certificate Metadata via tokenURI}
+    \label{fig:tokenuri_metadata}
+\end{figure}

@@ -1,0 +1,124 @@
+\begin{figure}[H]
+    \centering
+    
+    \begin{tikzpicture}[
+        scale=0.9, transform shape,
+        font=\small,
+        node distance=0.8cm and 1.5cm,
+        header/.style={
+            draw, 
+            font=\bfseries, 
+            minimum width=3.8cm, 
+            minimum height=0.7cm, 
+            rounded corners=2pt, 
+            align=center
+        },
+        block/.style={
+            draw, 
+            fill=lightgraybg, 
+            minimum width=3.8cm, 
+            minimum height=0.8cm, 
+            align=center, 
+            rounded corners=4pt
+        },
+        process/.style={
+            draw, dashed, 
+            fill=white, 
+            minimum width=3.8cm, 
+            font=\itshape, 
+            align=center
+        },
+        ledger/.style={
+            draw, 
+            thick, 
+            minimum width=4.5cm, 
+            minimum height=1.2cm, 
+            align=center, 
+            font=\bfseries
+        },
+        decision/.style={
+            draw,
+            thick, 
+            diamond, 
+            aspect=2, 
+            minimum width=3cm, 
+            align=center
+        },
+        success/.style={
+            draw,
+            thick,
+            minimum width=2.8cm, 
+            minimum height=0.7cm, 
+            align=center, 
+            font=\bfseries
+        },
+        fail/.style={
+            draw, 
+            thick, 
+            minimum width=2.8cm, 
+            minimum height=0.7cm, 
+            align=center, 
+            font=\bfseries
+        },
+        container/.style={
+            rectangle, 
+            draw, 
+            dashed, 
+            thick, 
+            rounded corners=5pt, 
+            inner sep=10pt
+        },
+    ]
+
+        \node[header] (h1) {Issuance \\phase};
+        \node[block, below=of h1] (univ) {University / School};
+        \node[process, below=of univ] (gen) {Generates Certificate};
+        \node[block, below=of gen] (pdfA) {PDF Certificate File};
+        \node[process, below=of pdfA] (shaA) {Run through SHA-256};
+        \node[block, below=of shaA] (hashA) {Hash A\\(Fingerprint)};
+        \node[block, below=of hashA, draw, thick] (nft) {Unique NFT Generated};
+
+        \node[ledger, right=of nft, xshift=1cm] (blockchain) {Public Blockchain\\(Issuer's Contract)};
+        \node[header, above=of blockchain, right=of h1, xshift=1cm] (h2) {Blockchain \\ledger};
+
+        \node[header, right=of h2, xshift=1.5cm] (h3) {Verification \\phase};
+        \node[block, below=of h3] (emp) {Employer / Portal};
+        \node[process, below=of emp] (rec) {Receives PDF from Grad};
+        \node[block, below=of rec] (pdfB) {PDF Certificate File};
+        \node[process, below=of pdfB] (shaB) {Run through SHA-256};
+        \node[block, below=of shaB] (hashB) {Hash B\\(Fingerprint)};
+        \node[block, below=of hashB] (tool) {Validation Tool};
+
+        \node[decision, below=of blockchain, yshift=-1.5cm] (compare) {Is Hash B\\== Hash A?};
+        \node[success, left=of compare, xshift=-0.8cm] (match) {Match\\(Verified Genuine)};
+        \node[fail, right=of compare, xshift=0.8cm] (mismatch) {Mismatch\\(Forgery Detected)};
+
+        \draw[->] (univ) -- (gen);
+        \draw[->] (gen) -- (pdfA);
+        \draw[->] (pdfA) -- (shaA);
+        \draw[->] (shaA) -- (hashA);
+        \draw[->] (hashA) -- (nft);
+        \draw[->] (nft) -- node[above, font=\scriptsize] {Mints with Hash A} (blockchain);
+        
+        % Column 3 Arrows
+        \draw[->] (emp) -- (rec);
+        \draw[->] (rec) -- (pdfB);
+        \draw[->] (pdfB) -- (shaB);
+        \draw[->] (shaB) -- (hashB);
+        \draw[->] (hashB) -- (tool);
+        \draw[->] (tool) -- node[above, font=\scriptsize] {Queries Contract} (blockchain);
+
+        \node (h1_container) [container, fit=(univ) (gen) (pdfA) (shaA) (hashA) (nft)] {};
+        \node (h2_container) [container, fit=(blockchain)] {};
+        \node (h3_container) [container, fit=(emp) (rec) (pdfB) (shaB) (hashB) (tool)] {};
+
+        \draw[->, thick] (blockchain) -- (compare);
+        \draw[->, thick] (tool.south) -- ++(0,-1.4) -| (compare.north);
+        
+        \draw[->, thick] (compare) -- node[above, text=black] {Yes} (match);
+        \draw[->, thick] (compare) -- node[above, text=black] {No} (mismatch);
+
+    \end{tikzpicture}
+    \caption{Decentralized Academic Certificate Verification Workflow}
+    \label{fig:academic_nft_verification}
+\end{figure}

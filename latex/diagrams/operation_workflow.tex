@@ -1,0 +1,43 @@
+\begin{figure}[H]
+    \centering
+    \makebox[\textwidth][c]{
+    \begin{tikzpicture}[
+        block/.style={rectangle, draw,text width=2.5cm, text centered, rounded corners, minimum height=1.2cm, font=\small},
+        line/.style={draw, -{Latex[length=2.5mm, width=1.5mm]}, thick},
+        node distance=2.0cm and 2.5cm
+    ]
+    
+    \node [block] (s1) {University Admin};
+    
+    \node [block, right=of s1] (s2) {Soulbound Certificate Token};
+    
+    \node [block, right=of s2] (s3) {Student Identity Wallet};
+
+    \node [block, below=of s3] (s4) {Blockchain Credential Record};
+
+    \node [block, below=of s4] (s7) {Back-end API};
+    
+    \node [block, left=of s7] (s6) {AI Assistant Agent};
+
+    \node [block, left=of s6] (s5) {Third-Party Verifier};
+
+     
+    
+    \path [line] (s1) -- node[above, font=\scriptsize, text width=2.3cm, text centered] {Sign Transaction} (s2);
+
+    \path [line] (s2) -- node[above, font=\scriptsize, text width=2.3cm, text centered] {} (s3);
+
+    \path [line] (s3) -- node[below, font=\scriptsize, text width=2.3cm, text centered] {} (s4);
+    
+    \path [line] (s5) -- node[above, font=\scriptsize, text width=2.3cm, text centered] {Verification Read Request} (s6);
+
+    \path [line] (s6) -- node[above, font=\scriptsize, text width=2.3cm, text centered] {Natural Language Query} (s7);
+
+    \path [line] (s7) -- node[above, font=\scriptsize, text width=2.3cm, text centered] {} (s4);
+    
+    \end{tikzpicture}
+
+    }
+    \caption{Operation workflow}
+    \label{fig:operation_workflow}
+\end{figure}

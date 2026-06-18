@@ -1,0 +1,41 @@
+ \begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[
+        every node/.style={font=\footnotesize},
+        stepbox/.style={
+            rectangle,
+            draw,
+            thick,
+            text width=3.2cm,
+            align=center,
+            minimum height=1.2cm,
+            rounded corners=3pt,
+        },
+        arrow/.style={-Stealth, thick}
+    ]
+
+    \node (s1) [stepbox]
+    {Traditional \\Centralized System};
+
+    \node (s2) [stepbox, below=1cm of s1]
+    {Central Database};
+
+    \node (s3) [stepbox, below left=1cm and 1cm of s2]
+    {Single Point of Failure};
+
+    \node (s4) [stepbox, below right=1cm and 1cm of s2]
+    {Verification Delays Due to Manual Processes};
+
+    \node (s5) [stepbox, below=1cm of s3]
+    {Risk of Unauthorized Database Manipulation};
+
+    \draw [arrow] (s1) -- (s2);
+    \draw [arrow] (s2) -- (s3);
+    \draw [arrow] (s2) -- (s4);
+    \draw [arrow] (s3) -- (s5);
+
+    \end{tikzpicture}
+
+    \caption{Limitations of Traditional Centralized Certificate Systems}
+    \label{fig:centralized_limitations}
+\end{figure}  

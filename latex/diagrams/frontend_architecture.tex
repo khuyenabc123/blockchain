@@ -1,0 +1,47 @@
+\begin{figure}[H]
+    \centering
+    
+    \begin{tikzpicture}[
+        scale=0.9, transform shape,
+        font=\small,
+        node distance=1.0cm and 1.0cm,
+        header/.style={
+            draw, 
+            font=\small,
+            minimum width=4.2cm, 
+            minimum height=1.0cm, 
+            rounded corners=2pt, 
+            align=center
+        },
+        container/.style={
+            rectangle, 
+            draw, 
+            dashed, 
+            thick, 
+            rounded corners=5pt, 
+            inner sep=10pt
+        },
+    ]
+
+        \node[header] (h1) {University Admin Console \\ (Controls list)};
+
+        \node[header, right=of h1.east] (h2) {Student Portal \\ (Secure Login \& Wallet Sync)};
+
+        \node[header, right=of h2.east] (h3) {Public Verifier \\ (Drag-and-drop upload \& AI Agent)};
+
+        \node[header, below=of h2.south] (h4) {React App Context \& State Engine \\ (Manages loading states, file streams, and wallet address variables)};
+
+        \node[header, below=of h4.south] (h5) {WEB3 HTTP Client Route \\ (Axios client that sends requests to Express/MongoDB backend)};
+
+        \draw[->, >=Latex, thick] (h1.south -| h2.north) -- (h2.north);
+        
+        \draw[->, >=Latex, thick] (h2.south -| h3.north) -- (h3.north);
+        \draw[->, >=Latex, thick] (h3.south -| h4.north) -- (h4.north);
+        \draw[->, >=Latex, thick] (h3.south -| h5.north) -- (h5.north);
+
+        \node (container) [container, fit=(h2) (h3) (h4) (h5)] {};
+
+    \end{tikzpicture}
+    \caption{Frontend-end Architecture Diagram}
+    \label{fig:fe_architecture_diagram}
+\end{figure}

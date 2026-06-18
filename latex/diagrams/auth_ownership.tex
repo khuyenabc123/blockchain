@@ -1,0 +1,87 @@
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[
+            font=\small,
+            >=Stealth,
+            headerbox/.style={
+                    rectangle,
+                    draw,
+                    thick,
+                    text width=4.8cm,
+                    align=center,
+                    minimum height=1.2cm,
+                    rounded corners=2pt
+                },
+            gatebox/.style={
+                    rectangle,
+                    draw,
+                    thick,
+                    text width=7.5cm,
+                    align=left,
+                    inner sep=10pt,
+                    rounded corners=2pt
+                },
+            resultbox/.style={
+                    rectangle,
+                    draw,
+                    thick,
+                    text width=3.2cm,
+                    align=center,
+                    minimum height=1.2cm,
+                    rounded corners=2pt
+                },
+            line/.style={draw, thick},
+            msgline/.style={draw, ->, thick},
+            labelstyle/.style={font=\sffamily\scriptsize, fill=white, inner sep=2pt, align=left}
+        ]
+
+        \node [headerbox] (portal) {\textbf{Verification Portal}\\ \footnotesize(Web3 App Interface)};
+        \node [headerbox, right=3.5cm of portal] (wallet) {\textbf{Student Client Wallet}\\ \footnotesize(MetaMask / Non-Custodial)};
+
+        \draw [line, dashed, gray] (portal.south) -- +(0, -3.2cm) coordinate (portal_base);
+        \draw [line, dashed, gray] (wallet.south) -- +(0, -3.2cm) coordinate (wallet_base);
+
+        \draw [msgline] ($(portal.south)+(0,-0.6cm)$) -- node[labelstyle, midway, yshift=4pt] {
+            1. Generates Random Challenge\\
+            \texttt{"Sign: Auth\_Session\_2026"}
+        } ($(wallet.south)+(0,-0.6cm)$);
+
+        \node [anchor=west, font=\sffamily\scriptsize, text width=4cm, align=left, xshift=5pt] at ($(wallet.south)+(0,-1.7cm)$) {
+            2. Approves prompt with\\ \hspace*{10pt}Private Key ($k_{priv}$)\\
+            3. Generates Signature ($\sigma$)
+        };
+
+        \draw [msgline] ($(wallet.south)+(0,-2.6cm)$) -- node[labelstyle, midway, yshift=4pt] {
+            4. Returns Cryptographic Signature ($\sigma$)
+        } ($(portal.south)+(0,-2.6cm)$);
+
+        \node [gatebox, below=3.2cm of portal.south, xshift=2.1cm] (gate) {
+            \textbf{Cryptographic Validation Gate} \\
+            \rule{\linewidth}{0.4pt} \\
+            \textbf{Math:} \texttt{ecrecover(Challenge, $\sigma$)} $\rightarrow$ \textit{Returns Address} \\
+            \textbf{Query:} Is derived Address == Token Owner?
+        };
+
+        \coordinate (gate_bottom) at (gate.south);
+
+        \node [resultbox] (match) at ($(gate_bottom) + (-2.2cm, -2.2cm)$) {
+            \textbf{MATCH} \\
+            \vspace{2pt}
+            \footnotesize Access Granted\\
+            \scriptsize (Owner Confirmed)
+        };
+
+        \node [resultbox] (mismatch) at ($(gate_bottom) + (2.2cm, -2.2cm)$) {
+            \textbf{MISMATCH} \\
+            \vspace{2pt}
+            \footnotesize Access Denied\\
+            \scriptsize (Signature Invalid)
+        };
+
+        \draw [line, ->] (gate_bottom) -- +(0,-0.4cm) -| (match.north);
+        \draw [line, ->] (gate_bottom) -- +(0,-0.4cm) -| (mismatch.north);
+
+    \end{tikzpicture}
+    \caption{Off-Chain Verification Mechanism via Asymmetric ECDSA Challenge-Response Handshake.}
+    \label{fig:crypto_verification}
+\end{figure}

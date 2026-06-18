@@ -1,0 +1,40 @@
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[
+            box/.style={
+                    draw,
+                    rectangle,
+                    rounded corners,
+                    minimum width=6cm,
+                    minimum height=0.9cm,
+                    align=left
+                },
+            arrow/.style={
+                    ->,
+                    thick
+                }
+        ]
+
+        % Left side
+        \node[box] (l1) {balanceOf(owner)};
+        \node[box, below=0.5cm of l1] (l2) {ownerOf(tokenId)};
+        \node[box, below=0.5cm of l2] (l3) {safeTransferFrom(...)};
+
+        % Right side
+        \node[box, right=4cm of l1] (r1) {Reads institutional balance states};
+        \node[box, below=0.5cm of r1] (r2) {Returns graduate owner wallet};
+        \node[box, below=0.5cm of r2] (r3) {\textbf{Reverted / Disabled Permantely}};
+
+        % Headers
+        \node[above=0.5cm of l1] {\textbf{Standard ERC-721 Specification}};
+        \node[above=0.5cm of r1] {\textbf{Custom Soulbound Architecture}};
+
+        % Arrows
+        \draw[arrow] (l1) -- (r1);
+        \draw[arrow] (l2) -- (r2);
+        \draw[arrow] (l3) -- (r3);
+
+    \end{tikzpicture}
+    \caption{Mapping of ERC-721 Functions to the Custom Soulbound NFT Architecture}
+    \label{fig:soulbound_mapping}
+\end{figure}

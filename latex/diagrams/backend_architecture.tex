@@ -1,0 +1,46 @@
+\begin{figure}[H]
+    \centering
+    
+    \begin{tikzpicture}[
+        scale=0.9, transform shape,
+        font=\small,
+        node distance=1.0cm and 1.0cm,
+        header/.style={
+            draw, 
+            font=\small,
+            minimum width=4.2cm, 
+            minimum height=1.0cm, 
+            rounded corners=2pt, 
+            align=center
+        },
+        container/.style={
+            rectangle, 
+            draw, 
+            dashed, 
+            thick, 
+            rounded corners=5pt, 
+            inner sep=10pt
+        },
+    ]
+
+        \node[header] (h1) {Client UI Side};
+
+        \node[header, below=of h1.south] (h2) {REST API GETWAY \\ (Express Controllers) \\ (Handle routes, request validation)};
+
+        \node[header, below=of h2.south] (h3) {CRYPTOGRAPHIC ENGINE \\ (Services Layer) \\ (PDFKit Buffer Compilation \& SHA-256 Hashing)};
+
+        \node[header, below left=of h3.south] (h4) {WEB3 PROVIDER LINK \\ (Ethers.js / Sepolia)};
+
+        \node[header, below right=of h3.south] (h5) {WEB2 PERSISTENCE LAYER \\ (Mongoose / MongoDB)};
+
+        \draw[->, >=Latex, thick] (h1.south -| h2.north) -- (h2.north);
+        \draw[->, >=Latex, thick] (h2.south -| h3.north) -- (h3.north);
+        \draw[->, >=Latex, thick] (h3.south -| h4.north) -- (h4.north);
+        \draw[->, >=Latex, thick] (h3.south -| h5.north) -- (h5.north);
+
+        \node (container) [container, fit=(h2) (h3) (h4) (h5)] {};
+
+    \end{tikzpicture}
+    \caption{Back-end Architecture Diagram}
+    \label{fig:be_architecture_diagram}
+\end{figure}

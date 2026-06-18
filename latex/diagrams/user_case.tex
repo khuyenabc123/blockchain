@@ -1,0 +1,94 @@
+\begin{figure}[htbp]
+\centering
+\resizebox{\textwidth}{!}{
+\begin{tikzpicture}
+    [
+    font=\small,
+    usecase/.style={
+        ellipse,
+        draw=black,
+        line width=0.8pt,
+        minimum width=4.0cm,
+        minimum height=1.1cm,
+        align=center,
+        fill=white,
+        inner sep=4pt
+    },
+    system_box/.style={
+        rectangle,
+        draw=black!50,
+        line width=1pt,
+        dashed,
+        rounded corners,
+        fill=black!1,
+        inner sep=0.9cm
+    },
+    arrow/.style={
+        line width=0.7pt,
+        draw=black!80,
+        -
+    },
+    dependency/.style={
+        line width=0.6pt,
+        draw=black!60,
+        dashed,
+        ->,
+        >=stealth,
+        every node/.style={font=\scriptsize\itshape, fill=white, inner sep=2pt}
+    }
+]
+
+    \node [usecase] (wallet) at (0, 0) {Connect Crypto Wallet\\(Authentication)};
+
+    \node [usecase] (mint)  at (-4.5, 3.5) {Mint Soulbound\\Certificate (NFT)};
+    \node [usecase] (claim) at (4.5, 3.5) {Claim \& View\\Personal Certificates};
+
+    \node [usecase] (ipfs)  at (-4.5, -2.2) {Upload Metadata\\to IPFS};
+    \node [usecase] (query) at (4.5, -2.2) {Query AI Agent\\for Verification};
+
+    \node [usecase] (revoke) at (-4.5, -5.0) {Revoke / Deprecate\\Certificate};
+    \node [usecase] (verify) at (4.5, -5.0) {Verify Certificate\\Hash on Blockchain};
+
+    \begin{scope}[shift={(-9.5, 0)}, line width=1pt]
+        \draw (0,0.5) circle (0.15); \draw (0,0.35) -- (0,0); 
+        \draw (-0.2,0.2) -- (0,0.3) -- (0.2,0.2); \draw (-0.15,-0.3) -- (0,0) -- (0.15,-0.3);
+        \node[below=0.2cm of {0,-0.3}, font=\bfseries, align=center] (admin) {ADMIN\\(University)};
+    \end{scope}
+
+    \begin{scope}[shift={(9.5, 3.5)}, line width=1pt]
+        \draw (0,0.5) circle (0.15); \draw (0,0.35) -- (0,0); 
+        \draw (-0.2,0.2) -- (0,0.3) -- (0.2,0.2); \draw (-0.15,-0.3) -- (0,0) -- (0.15,-0.3);
+        \node[below=0.2cm of {0,-0.3}, font=\bfseries] (student) {STUDENT};
+    \end{scope}
+
+    \begin{scope}[shift={(9.5, -0.2)}, line width=1pt]
+        \draw (0,0.5) circle (0.15); \draw (0,0.35) -- (0,0); 
+        \draw (-0.2,0.2) -- (0,0.3) -- (0.2,0.2); \draw (-0.15,-0.3) -- (0,0) -- (0.15,-0.3);
+        \node[below=0.2cm of {0,-0.3}, font=\bfseries, align=center] (verifier) {VERIFIER\\(Employer)};
+    \end{scope}
+
+    \begin{scope}[on background layer]
+        \node[system_box, fit=(wallet) (ipfs) (verify) (mint) (claim) (query) (revoke), 
+              label={[font=\bfseries\large, text=black!80]north:NFT Academic Verification System}] (boundary) {};
+    \end{scope}
+
+    \draw [arrow] (admin.east) -- (wallet.west);
+    \draw [arrow] (admin.east) -- (ipfs.west);
+    \draw [arrow] (admin.east) -- (revoke.west);
+
+    \draw [arrow] (student.west) -- (wallet.east);
+    \draw [arrow] (student.west) -- (claim.east);
+
+    \draw [arrow] (verifier.west) -- (query.east);
+    \draw [arrow] (verifier.west) -- (verify.east);
+    \draw [arrow] (verifier.west) -- (wallet.east); 
+    
+    \draw [dependency] (mint)  -- (wallet) node[pos=0.5, sloped, above] {\textless\textless include\textgreater\textgreater};
+    \draw [dependency] (mint)  -- (ipfs)   node[pos=0.5, left] {\textless\textless include\textgreater\textgreater};
+    \draw [dependency] (claim) -- (wallet) node[pos=0.5, sloped, above] {\textless\textless include\textgreater\textgreater};
+    \draw [dependency] (query) -- (verify) node[pos=0.5, left] {\textless\textless extend\textgreater\textgreater};
+
+\end{tikzpicture}
+}
+\caption{Use Case Diagram}
+\end{figure}

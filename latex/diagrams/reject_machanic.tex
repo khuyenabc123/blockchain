@@ -1,0 +1,76 @@
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[
+            font=\small,
+            node distance=1.8cm,
+            block/.style={
+                    rectangle,
+                    draw,
+                    thick,
+                    text width=6.5cm,
+                    align=center,
+                    rounded corners=2pt,
+                    minimum height=1cm
+                },
+            hookblock/.style={
+                    rectangle,
+                    draw,
+                    thick,
+                    text width=7cm,
+                    align=left,
+                    rounded corners=2pt,
+                    inner sep=8pt
+                },
+            revertblock/.style={
+                    rectangle,
+                    draw,
+                    thick,
+                    text width=6.5cm,
+                    align=center,
+                    rounded corners=2pt,
+                    minimum height=0.8cm
+                },
+            line/.style={draw, thick},
+            labelstyle/.style={align=left, font=\scriptsize, inner sep=2pt}
+        ]
+
+        \node [block] (registry) {
+            \textbf{University Registry}
+        };
+
+        \node [block, below=of registry] (studentA) {
+            \textbf{Student A} \\
+            \footnotesize(0x70997970C51812dc3A010C7d01....)
+        };
+
+        \node [hookblock, below=of studentA] (hook) {
+            \textbf{OpenZeppelin v4 Lifecycle Hook} \\
+            \rule{\linewidth}{0.4pt} \\
+            \textbf{Invokes:} \texttt{\_beforeTokenTransfer()} \\
+            \textbf{Checks:} \texttt{from == address(0)} (\textit{Evaluates to False})
+        };
+
+        \node [revertblock, below=of hook] (revert) {
+            \textbf{REJECTED} \\
+            \footnotesize {Reason: "Transfer restriction enforced"}
+        };
+
+        \node [block, below=of revert] (studentB) {
+            \textbf{Student B} \\
+            \footnotesize(0x3C44CdDdB6a900fa2b585dd299e...) \\
+            \vspace{2pt}
+            \scriptsize\textit{(Result: Receives 0x0 Tokens / State Unchanged)}
+        };
+
+        \path [line, ->] (registry) -- node[labelstyle, midway, right] {1. \texttt{mintCertificate()}} (studentA);
+
+        \path [line, ->] (studentA) -- node[labelstyle, midway, right] {2. Attempts P2P Transfer\\ \hspace*{10pt}via \texttt{transferFrom()}} (hook);
+
+        \path [line, ->] (hook) -- node[labelstyle, midway, right] {3. TRANSACTION REVERTED} (revert);
+
+        \path [line, ->, dashed, draw] (revert) -- (studentB);
+
+    \end{tikzpicture}
+    \caption{Lifecycle of a blocked transfer transaction}
+    \label{fig:sbt_lifecycle}
+\end{figure}

@@ -1,0 +1,48 @@
+\begin{figure}[H]
+    \centering
+
+    \begin{tikzpicture}[
+            scale=0.9, transform shape,
+            font=\small,
+            node distance=1.0cm and 1.5cm,
+            header/.style={
+                    draw,
+                    font=\small,
+                    minimum width=4.2cm,
+                    minimum height=1.0cm,
+                    rounded corners=2pt,
+                    align=center
+                },
+            wideheader/.style={
+                    draw,
+                    font=\small,
+                    minimum width=10.0cm,
+                    minimum height=1.0cm,
+                    rounded corners=2pt,
+                    align=center
+                }
+        ]
+
+        \node[wideheader] (h1) {Front-end User Interface \\ (React JS web app with Ethers.js)};
+
+        \node[header, below left=of h1.south, xshift=1.1cm] (h2) {AI assistant agent \\ (NPL Processing Engine)};
+
+        \node[header, below right=of h1.south, xshift=-1.1cm] (h3) {Central Database \\ (MongoDB Atlas Users)};
+
+        \node[wideheader, below=of h2.south, xshift=2.5cm, yshift=-0.2cm] (h4) {Decentralized Backend Environment};
+
+        \node[header, below left=of h4.south, xshift=1.1cm] (h5) {EVM-Compatible Blockchain
+            \\ (Hardhat / Sepolia)};
+
+        \node[header, below right=of h4.south, xshift=-1.1cm] (h6) {Decentralized Storage \\ (IPS P2P Network Node)};
+
+        \draw[->, >=Latex, thick] (h1.south -| h2.north) -- (h2.north);
+        \draw[->, >=Latex, thick] (h1.south -| h3.north) -- (h3.north);
+        \draw[->, >=Latex, thick] (h2.south) -- (h4.north -| h2.south);
+        \draw[->, >=Latex, thick] (h4.south -| h5.north) -- (h5.north);
+        \draw[->, >=Latex, thick] (h4.south -| h6.north) -- (h6.north);
+
+    \end{tikzpicture}
+    \caption{Architecture Diagram}
+    \label{fig:architecture_diagram}
+\end{figure}

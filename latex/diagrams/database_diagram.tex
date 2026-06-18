@@ -1,0 +1,101 @@
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[
+            font=\small,
+            node distance=1.2cm,
+            db_table/.style={
+                    rectangle split,
+                    rectangle split parts=2,
+                    draw,
+                    line width=0.8pt,
+                    minimum width=4.2cm,
+                    text width=3.8cm,
+                    align=left,
+                    inner sep=5pt
+                },
+            arrow/.style={
+                    ->,
+                    line width=0.8pt,
+                    draw
+                },
+            link_label/.style={
+                    font=\scriptsize\itshape,
+                    inner sep=2pt
+                }
+        ]
+
+        \node[db_table] (users) {
+            \textbf{\centerline{Students}}\\
+            \textbf{\centerline{(MongoDB)}}
+            \nodepart{second}\ttfamily\small
+            \_id \\
+            studentId \\
+            studentName \\
+            dateOfBirth \\
+            email \\
+            passwordHash \\
+            mustChangePassword \\
+            isEligibleToGraduate \\
+            hasGraduated \\
+            createAt \\
+            updateAt \\
+            studentWallet
+        };
+
+        \node[db_table, right=of users] (certs) {
+            \textbf{\centerline{Certificates}}\\
+            \textbf{\centerline{(MongoDB)}}
+            \nodepart{second}\ttfamily\small
+            \_id \\
+            tokenId \\
+            studentWallet \\
+            studentId \\
+            studentName \\
+            degree \\
+            major \\
+            graduationDate \\
+            ipfsHash \\
+            txHash \\
+            lifecycleStatus \\
+            status \\
+            issuedBy \\
+            pdfCID \\
+            fileHash \\
+            issueAt
+        };
+
+        \node[db_table, below=of certs] (contract) {
+            \textbf{\centerline{Smart Contract}}\\
+            \textbf{\centerline{(Blockchain)}}
+            \nodepart{second}\ttfamily\small
+            ownerOf(tokenId) \\
+            tokenURI \\
+            isValid
+        };
+
+        \node[db_table, left=of contract] (ipfs) {
+            \textbf{\centerline{NFT Metadata}}
+            \textbf{\centerline{(IPFS)}}
+            \nodepart{second}\ttfamily\small
+            name \\
+            description \\
+            image \\
+            attributes[] \\
+            externalUrl \\
+            issuer \\
+            issueDate \\
+        };
+
+        \draw[arrow] (users.east) -- (certs.west)
+        node[pos=0.5, yshift=0.3cm, link_label] {issues};
+
+        \draw[arrow] (certs.south) -- (contract.north)
+        node[pos=0.5, xshift=0.8cm, link_label] {references};
+
+        \draw[arrow] (contract.west) -- (ipfs.east)
+        node[pos=0.5, yshift=0.3cm, link_label] {CID};
+
+    \end{tikzpicture}
+    \caption{Database Diagram}
+    \label{fig:database_diagram}
+\end{figure}

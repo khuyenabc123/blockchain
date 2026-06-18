@@ -1,0 +1,28 @@
+\begin{figure}[H]
+    \centering
+    \makebox[\textwidth][c]{
+    \begin{tikzpicture}[
+        block/.style={rectangle, draw,text width=2.5cm, text centered, rounded corners, minimum height=1.2cm, font=\small},
+        line/.style={draw, -{Latex[length=2.5mm, width=1.5mm]}, thick},
+        node distance=2.0cm and 2.5cm
+    ]
+    
+    \node [block] (school) {School};
+    \node [block, right=of school] (student1) {Student \\ \footnotesize(Holds cert; can be lost/damaged)};
+    \node [block, right=of student1] (employer1) {Employer \\ \footnotesize(Requests valid stamped copy)};
+    \node [block, below=of employer1] (gov) {Government \\ \footnotesize(Verifies \& stamps)};
+    \node [block, left=of gov] (student2) {Student \\ \footnotesize(Takes verified copy)};
+    \node [block, left=of student2] (employer2) {Employer \\ \footnotesize(Final verification)};
+    
+    \path [line] (school) -- node[above, font=\scriptsize, text width=2.3cm, text centered] {Issues\\Certificate} (student1);
+    \path [line] (student1) -- node[above, font=\scriptsize, text width=2.3cm, text centered] {Applies for\\Job} (employer1);
+    \path [line] (employer1) -- node[right, font=\scriptsize, text width=2.3cm, text centered] {Demands official verification} (gov);
+    \path [line] (gov) -- node[above, font=\scriptsize, text width=2.3cm, text centered] {Returns stamped verification} (student2);
+    \path [line] (student2) -- node[above, font=\scriptsize, text width=2.3cm, text centered] {Submits verified document} (employer2);
+    
+    \end{tikzpicture}
+
+    }
+    \caption{Traditional Certificate Verification Process Flow }
+    \label{fig:traditional_process}
+\end{figure}
