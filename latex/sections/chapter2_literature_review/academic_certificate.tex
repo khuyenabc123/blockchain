@@ -1,0 +1,34 @@
+\subsection{Academic Certificate Systems}
+
+Integrating decentralized technology into academic administration means confronting a major bottleneck: how current validation frameworks handle data security and day-to-day operations. This section breaks down the actual mechanics of traditional credentialing and pits them against emerging blockchain verification models.
+
+\subsubsection{Traditional Academic Verification Process}
+
+For decades, academic certificate management has leaned on a mix of paper documents and isolated, centralized databases. When a graduate hands over a degree, third parties usually end up dealing with one of two fundamentally flawed verification loops:
+
+\begin{itemize}
+    \item \textbf{Physical Certificates}: Paper credentials rely on physical security—think ink signatures, embossed seals, and complex watermarks to keep forgers at bay. But physical assets are an operational nightmare. Paper rots, gets lost in moves, or vanishes in fires, which forces alumni back to university registrars for manual, slow re-issuance. On top of that, the vetting process happens completely offline. For an employer to verify a degree, they have to physically collect certified hard copies or chase down a university administrator via email or phone. It is slow, analog, and expensive.
+
+          \input{diagrams/traditional_process}
+
+    \item \textbf{Centralized Database Systems}: To speed things up, most modern institutions migrated records to central digital repositories. Yet this migration just swapped physical vulnerabilities for a digital Single Point of Failure (SPoF)\cite{yuan2014testing}. When the central server goes down, the university's entire verification capability vanishes with it. Worse, central ledgers are only as honest as the people managing them. A corrupt database admin or an employee with hijacked high-level credentials can quietly alter grades or falsify a graduation status directly in the database, rendering internal fraud incredibly difficult to track.
+
+\end{itemize}
+
+\subsubsection{Blockchain-based Verification Architectures}
+
+Blockchain architectures fundamentally rebuild this trust model. Instead of relying on the administrative integrity of a single institution, they shift credential authentication away from database access and ground it directly in cryptographic proof\cite{blockchainineducation}.
+
+\paragraph{Distributed Record Storage}: Rather than locking student records inside a solitary university server room, a blockchain-based setup anchors academic milestones to a peer-to-peer network\cite{blockchainineducationv2}. The moment a university logs a certificate status on the ledger, that entry is copied across dozens or hundreds of independent nodes simultaneously. This redundancy keeps the verification pipeline up and running; even if a massive cyberattack takes the issuing university's internal servers completely offline, third-party employers can still securely verify student records anywhere in the world\cite{blockchainineducation}.
+
+\paragraph{Asymmetric Cryptography and Tamper-Evidence}: At its core, the integrity of these records relies on public-private cryptographic key pairs. When an institution issues a diploma or logs an educational milestone, it must digitally sign that transaction using its private key\cite{blockchainineducationv2}.
+
+\begin{itemize}
+    \item Proof of Origin: Because the university binds its public key to its public identity on the network, an employer's background-check software can instantly verify exactly where the credential came from. There is no need to pick up the phone or send verification emails to a registrar's office\cite{blockchainineducation}.
+
+    \item Tamper-Evidence: The data is practically impossible to alter secretly. If a rogue administrator or external hacker attempts to modify a historical record, the tweak breaks the cryptographic hash of that specific block. The network's consensus mechanism spots this structural mismatch instantly and drops the fraudulent change on the spot\cite{blockchainineducationv2}.
+\end{itemize}
+
+\paragraph{Student Ownership and Tokenization}: Traditional ecosystems force the university to play the role of permanent custodian and gatekeeper for student data. Blockchain subverts this dependency, shifting data ownership over to the graduates themselves\cite{blockchainineducation}. Once a school transfers a certificate token to a student's personal wallet address, that student holds absolute, exclusive control over their academic proof via their private key\cite{blockchainineducationv2}. Even if the university downscales, changes its entire IT infrastructure, or shuts its doors permanently, the graduate's credential remains valid and universally verifiable\cite{blockchainineducation}. The underlying framework achieves this by tokenizing degrees into unique, non-fungible assets that leverage the ERC-721 properties detailed in Section 2.4—embedding permanent institutional metadata straight into the student's cryptographic wallet.
+
+\input{tables/traditional_vs_blockchain}
