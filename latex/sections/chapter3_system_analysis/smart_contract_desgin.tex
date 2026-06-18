@@ -1,0 +1,26 @@
+\subsection{Smart Contract Design}
+
+The proposed academic certificate verification system utilizes a Solidity smart contract deployed on an EVM-compatible blockchain network. The smart contract serves as the decentralized registry responsible for issuing, validating, and managing academic credentials represented as Soulbound Tokens (SBTs).\\
+
+Instead of storing complete certificate information on-chain, the contract stores a reference to certificate metadata hosted on IPFS. This approach reduces blockchain storage requirements while preserving transparency, immutability, and verifiability. The contract maintains certificate ownership information, validity status, and administrative permissions required for credential management.
+
+\subsubsection{Core Functions}
+The smart contract provides three primary functions that manage the lifecycle of an academic certificate.
+
+\begin{enumerate}
+    \item \texttt{mintCertificate(address student, string memory tokenURI)}
+
+          This function is used by the university administrator to issue a new academic certificate. The function generates a unique Token ID, associates it with the student's wallet address, stores the IPFS metadata reference, and marks the certificate as valid.
+
+    \item \texttt{verifyCertificate(uint256 tokenId)}
+
+          This public read-only function allows external users and verification systems to validate a certificate. Given a Token ID, the function returns the certificate owner, metadata URI, and validity status.
+
+    \item \texttt{revokeCertificate(uint256 tokenId)}
+
+          This administrative function invalidates an existing certificate by changing its status from active to inactive. Revocation may be required in cases such as administrative corrections or invalid credential issuance.
+\end{enumerate}
+
+\subsubsection{Soulbound Enforcement}
+
+Unlike traditional ERC-721 NFTs, academic credentials should remain permanently associated with their original owners. To enforce this requirement, the proposed system adopts the Soulbound Token (SBT) model. The contract overrides the standard ERC-721 transfer functions (\texttt{transferFrom()} and \texttt{safeTransferFrom()} and forces them to revert whenever a transfer attempt is made. As a result, certificates cannot be bought, sold, exchanged, or transferred between wallet addresses. This mechanism ensures that each certificate remains permanently linked to the graduate who originally received it, preserving authenticity and preventing credential misuse.

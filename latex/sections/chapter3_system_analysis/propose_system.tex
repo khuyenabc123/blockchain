@@ -1,0 +1,51 @@
+\subsection{Proposed System}
+
+\input{diagrams/traditional_limits}
+
+The proposed solution is a blockchain-based academic credential verification system that issues academic certificates as non-transferable digital certificates tokens inspired by Soulbound Token (SBT) concepts. The system combines smart contracts, decentralized storage, and an AI-assisted verification interfaces to improve certificate authenticity, transparency, and accessibility.\\
+
+Unlike traditional centralized management systems that rely on centralized databases, the proposed architecture records certificate ownership and verification data on a blockchain network while storing certificate metadata on IPFS. The overall workflow of the system is shown below:
+
+\input{diagrams/operation_workflow}
+
+\subsubsection{Core Engineering Components}
+
+\textbf{Cryptographic Certificate Issuance}: When a student graduates, the university administrator generates a digital certificate and initiates the issuance process through the system. The smart contract then creates a unique certificate non-transferable certificate NFT and assign it to the student's wallet address. Each NFT contains a reference to metadata stored on IPFS, allowing the certificate information to be retrieved and verified when needed.\\
+
+\textbf{Non-Transferable Ownership Logic}: Academic certificates should remain permainently associated with the inviduals who earned them. To prevent certificate trading, identity swapping, or unauthorized ownership transfer, the smart contract disables NFT transfer operations. Once a certificate is issued to student's wallet, ownership cannot be transferred to another address. This approach follows the principles of Soulbound Tokens (SBTs) and helps prevent certificate trading, identity misuse, and unauthorized ownership changes.\\
+
+\textbf{Decentralized Metadata Storage}: Storing large files directly on-chain is expensive and inefficient. Therefore the system stores certificate documents and metadata on IPFS while keeping only the corresponding Content Indentifier (CID) on the blockchain. This approach reduces storages costs while preserving document integrity and traceability.
+
+\subsubsection{Addessing Existing Limitations}
+
+Based on the literature review, the proposed system addresses several limitations found in existing academic credential verification solutions.
+
+\begin{itemize}
+    \item \textbf{Low-Cost Development and Testing}: For development, testing, and validation, the system is develop using the Hardhat development environment and configured for deployment on the Sepolia Ethereum Test Network, allowing testing and validation without incurring real transaction costs.
+
+    \item \textbf{Non-Transferable Credentials}: Unlike standard NFT implementations, the proposed certificate NFTs cannot be transferred between users. This ensures that academic credentials remain permanently linked to their original owners.
+
+    \item \textbf{Transparent Verification}: Certificate ownership and validity can be verified directly from blockchain records. This reduces dependence on centralized institutional databases and improves long-term accessibility.
+
+    \item \textbf{AI-Assisted Accessibility}: The system includes an AI-based assistant that helps users interpret verification results and navigate the verification process through natural language interactions. This makes the platform more accessible to users without blockchain knowledge.
+\end{itemize}
+
+
+\subsubsection{Certificate Verification Workflow}
+
+The proposed system verifies academic credentials using mbining cryptographic hashing, blockchain records, and decentralized metadata storage.\\
+
+During certificate issuance, the university generates a certificate and calculates its SHA-256 hash. This hash acts as a unique digital fingerprint of the document. The hash is then linked to a certificate NFT and stored in the smart contract.\\
+
+During verification, an external verifier uploads the certificate document. The system calculates a new SHA-256 hash from the uploaded file and compares it with the hash stored on the blockchain.
+
+\input{diagrams/decentralized_academic_cert_workflow}
+
+Let breakdown the above diagram:
+\begin{itemize}
+    \item Issuance Phase: At this stage, the university creates the digital certificate asset. Before storage and token issuance, the file is processed through the SHA-256 hashing algorithm, creating a unique, immutable 64-character hexadecimal string (in the diagram, Hash A). The smart contract creates an NFT containing this specific hash string in its metadata structure.
+
+    \item Verification phase: When applicants submit their applications, they send a digital PDF file to the employer. The verification process runs the same SHA-256 algorithm as on the file the applicant uploaded to calculate a unique hash code (Hash code B in the diagram).
+
+    \item Certificate Integrity Verification: The blockchain network query platform reads hash code A stored in the token registry. If \texttt{Hash A == Hash B}, the document structure is completely intact and verified as correct. If even a single letter, dot, or pixel differs, the hash code will result in a final result of No Match (Forgery Detection).
+\end{itemize}

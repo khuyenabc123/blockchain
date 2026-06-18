@@ -1,0 +1,83 @@
+\subsection{Database Diagram}
+
+The proposed system uses both blockchain storage and a traditional database. The blockchain is responsible for storing certificate ownership and verification information, while MongoDB manages application-level data such as student records, certificate records. This hybrid approach improves efficiency by keeping frequently updated information in the database while preserving certificate integrity on the blockchain.
+
+\input{diagrams/database_diagram}
+
+\begin{lstlisting}[
+        language=json, 
+        caption={Users Collection},
+        style=codeStyle
+    ]
+    {
+      "_id": "ObjectId('65f3a1b2e4b0c2a1d4e5f6a1')",
+      "walletAddress": "0x71C7656EC7ab88b098defB751B7401B5f6d1476B",
+      "role": "Admin",
+      "fullName": "Office of the Registrar",
+      "email": "registrar@university.edu",
+      "status": "Active",
+      "createdAt": "2026-01-15T08:30:00.000Z"
+    }
+\end{lstlisting}
+
+\begin{lstlisting}[
+        language=json, 
+        caption={Certificates Collection},
+        style=codeStyle
+    ]
+    {
+      "_id": "ObjectId('65f3a1b2e4b0c2a1d4e5f6a2')",
+      "tokenId": 1042,
+      "studentWallet": "0xABC123...",
+      "studentName": "Nguyen Van A",
+      "degreeType": "Bachelor of Science",
+      "major": "Computer Science",
+      "graduationDate": "2026-05-28",
+      "ipfsHash": "QmZtm26T...H6Kx7z",
+      "txHash": "0x9f8e7d...6b5a4c",
+      "status": "Active",
+      "issuedBy": "0xAdminWallet",
+      "issuedAt": "2026-05-28T10:00:00Z",
+      "revokedAt": null,
+      "revocationReason": null
+    },
+
+    {
+      "_id": "ObjectId('65f3a1b2e4b0c2a1d4e5f6a2')",
+      "tokenId": 1042,
+      "studentWallet": "0xABC123...",
+      "studentName": "Nguyen Van A",
+      "degreeType": "Bachelor of Science",
+      "major": "Computer Science",
+      "graduationDate": "2026-05-28",
+      "ipfsHash": "QmZtm26T...H6Kx7z",
+      "txHash": "0x9f8e7d...6b5a4c",
+      "status": "Revoked",
+      "issuedBy": "0xAdminWallet",
+      "issuedAt": "2026-05-28T10:00:00Z",
+      "revokedAt": "2027-01-10T08:00:00Z",
+      "revocationReason": "Administrative correction"
+    }
+\end{lstlisting}
+
+\begin{lstlisting}[
+        language=json, 
+        caption={NFT Metadata Collection},
+        style=codeStyle
+    ]
+    {
+      "name": "Academic Degree Certificate #1042",
+      "description": "Official digital verification document issued by State Technical University.",
+      "image": "ipfs://QmYwAP...xZ2tP/certificate.pdf",
+      "attributes": [
+        { "trait_type": "Student Name", "value": "Nguyen Van A" },
+        { "trait_type": "Degree ID", "value": "2026-CS-1042" },
+        { "trait_type": "Major", "value": "Computer Science" },
+        { "trait_type": "GPA", "value": "3.85" },
+        { "trait_type": "Honors", "value": "Magna Cum Laude" }
+      ],
+      "externalUrl": "https://university.edu/verify/1042",
+      "issuer": "State Technical University",
+      "issueDate": "2026-05-28"
+    }
+\end{lstlisting}

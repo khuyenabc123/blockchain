@@ -1,0 +1,22 @@
+\subsection{Sequence Diagram}
+\input{diagrams/sequence_diagram}
+
+The above figure illustrates the sequence of interactions between the administrator, application server, IPFS, and blockchain network during the certificate issuance process.
+
+\begin{enumerate}
+    \item The admin submits the student's academic information through the system interface and the frontend call to the application server backend.
+
+    \item The backend server formats the certificate data into a structured JSON schema configuration and uploads it to the IPFS network cluster.
+
+    \item The metadata is uploaded to IPFS, which generate a unique, tamper-evident Content Identifier hash (CID) and pass it back to the server.
+
+    \item The server relays the prepared transaction parameters along with the CID back to the Admin client interface.
+
+    \item The Admin signs and transmits an EVM transaction payload calling the \path{mintCertificate(studentAddress, tokenURI)} function on the deployed smart contract.
+
+    \item The smart contract validates the Admin's address and updates the internal mapping index array, binding the new unique token ID directly to the target student's public wallet address.
+
+    \item The smart contract records the immutable IPFS CID string into persistent blockchain storage.
+
+    \item The network executes state confirmation, writes the block to the distributed ledger, emits a \texttt{Minted} logging event, and returns a transaction receipt to the frontend client.
+\end{enumerate}
