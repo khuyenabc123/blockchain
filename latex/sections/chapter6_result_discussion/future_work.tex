@@ -1,0 +1,46 @@
+\subsection{Future Work}
+
+    Several enhancements can be considered to improve the system and support production deployment.
+
+    \input{tables/project_future_work}
+
+    \subsubsection{Blockchain-Based Academic Transcript Verification}
+    
+    The current system focuses primarily on issuing and verifying NFT-based academic certificates. A potential extension of the platform is the incorporation of academic transcript verification. Instead of verifying only graduation certificates, the system could issue blockchain-backed transcript records containing detailed academic performance information, such as:
+
+    \begin{itemize}
+        \item Individual course results
+        
+        \item Semester GPA
+        
+        \item Cumulative GPA
+        
+        \item Academic honors and distinctions
+        
+        \item Course completion history
+    \end{itemize}
+
+    Similar to the certificate issuance process, transcript data could be hashed using SHA-256 and linked to decentralized storage through IPFS. A corresponding NFT or blockchain credential record could then be generated to represent the transcript. This approach would allow employers, universities, scholarship organizations, and professional certification bodies to independently verify academic achievements while reducing the risk of transcript forgery or unauthorized modifications.\\
+    
+    Future research may also investigate privacy-preserving approaches, such as selective disclosure and zero-knowledge proof mechanisms, allowing students to reveal only specific academic information when required.
+    
+
+    \subsubsection{Institution-Specific Large Language Model Development}
+    
+    The current implementation utilizes a third-party cloud-hosted Large Language Model (Llama 3.3) through the Groq API. While this approach provides high-quality responses and rapid deployment, it introduces dependence on external AI service providers. A future enhancement would involve developing and deploying a dedicated institutional AI model trained on domain-specific educational data and certificate verification workflows.\\
+    
+    Potential advantages include:
+
+    \begin{itemize}
+        \item Greater control over model behavior and outputs
+        
+        \item Reduced dependence on third-party AI providers
+        
+        \item Enhanced privacy and data governance
+        
+        \item Improved accuracy for academic credential verification tasks
+        
+        \item Custom knowledge integration for institutional regulations and policies
+    \end{itemize}
+    
+    Future implementations may adopt open-source foundation models such as Llama, Mistral, or Qwen and fine-tune them using educational datasets, blockchain verification records, and institutional documentation. By hosting the model within the university infrastructure, all verification requests and certificate-related data could remain under institutional control, improving both privacy protection and operational independence.\\
