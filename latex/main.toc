@@ -1,0 +1,91 @@
+\babel@toc {english}{}\relax 
+\contentsline {section}{Acknowledgement}{1}{section*.1}%
+\contentsline {section}{\numberline {1}Introduction}{4}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Background}{4}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Problem Statement}{5}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Objectives}{5}{subsection.1.3}%
+\contentsline {subsection}{\numberline {1.4}Scope of the Project}{6}{subsection.1.4}%
+\contentsline {subsection}{\numberline {1.5}Research Methodology}{7}{subsection.1.5}%
+\contentsline {section}{\numberline {2}Literature review \& Theoretical background}{7}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Blockchain Fundamentals}{7}{subsection.2.1}%
+\contentsline {subsubsection}{\numberline {2.1.1}Decentralization}{8}{subsubsection.2.1.1}%
+\contentsline {subsubsection}{\numberline {2.1.2}Blocks}{8}{subsubsection.2.1.2}%
+\contentsline {subsubsection}{\numberline {2.1.3}Hashing}{9}{subsubsection.2.1.3}%
+\contentsline {subsubsection}{\numberline {2.1.4}Consensus}{10}{subsubsection.2.1.4}%
+\contentsline {subsection}{\numberline {2.2}Smart Contracts}{12}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Solidity}{13}{subsection.2.3}%
+\contentsline {subsubsection}{\numberline {2.3.1}Global Variables and msg.sender}{13}{subsubsection.2.3.1}%
+\contentsline {subsubsection}{\numberline {2.3.2}Mappings for Data Storage}{13}{subsubsection.2.3.2}%
+\contentsline {subsubsection}{\numberline {2.3.3}State Variables and Blockchain Storage}{14}{subsubsection.2.3.3}%
+\contentsline {subsection}{\numberline {2.4}Non-Fungible Token (NFT)}{14}{subsection.2.4}%
+\contentsline {subsubsection}{\numberline {2.4.1}The ERC-721 Token Standard \& Soulbound (SBT) Modifications}{14}{subsubsection.2.4.1}%
+\contentsline {subsubsection}{\numberline {2.4.2}Token Metadata, IPFS Schemas, and Dynamic Mapping States}{16}{subsubsection.2.4.2}%
+\contentsline {subsubsection}{\numberline {2.4.3}Dual-Key Cryptographic Ownership \& Hash Verification}{16}{subsubsection.2.4.3}%
+\contentsline {subsection}{\numberline {2.5}Academic Certificate Systems}{17}{subsection.2.5}%
+\contentsline {subsubsection}{\numberline {2.5.1}Traditional Academic Verification Process}{17}{subsubsection.2.5.1}%
+\contentsline {subsubsection}{\numberline {2.5.2}Blockchain-based Verification Architectures}{18}{subsubsection.2.5.2}%
+\contentsline {paragraph}{Distributed Record Storage}{18}{section*.3}%
+\contentsline {paragraph}{Asymmetric Cryptography and Tamper-Evidence}{18}{section*.4}%
+\contentsline {paragraph}{Student Ownership and Tokenization}{18}{section*.5}%
+\contentsline {subsection}{\numberline {2.6}Existing Research Papers}{19}{subsection.2.6}%
+\contentsline {subsubsection}{\numberline {2.6.1}Literature Review Matrix}{19}{subsubsection.2.6.1}%
+\contentsline {subsubsection}{\numberline {2.6.2}Identified Research Gaps and Proposed Technical Solutions}{21}{subsubsection.2.6.2}%
+\contentsline {section}{\numberline {3}System analysis \& Design}{22}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Proposed System}{23}{subsection.3.1}%
+\contentsline {subsubsection}{\numberline {3.1.1}Core Engineering Components}{24}{subsubsection.3.1.1}%
+\contentsline {subsubsection}{\numberline {3.1.2}Addessing Existing Limitations}{24}{subsubsection.3.1.2}%
+\contentsline {subsubsection}{\numberline {3.1.3}Certificate Verification Workflow}{24}{subsubsection.3.1.3}%
+\contentsline {subsection}{\numberline {3.2}Architecture Diagram}{26}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Use Case Diagram}{27}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Sequence Diagram}{29}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}Activity Diagram}{30}{subsection.3.5}%
+\contentsline {subsection}{\numberline {3.6}Database Diagram}{30}{subsection.3.6}%
+\contentsline {subsection}{\numberline {3.7}Smart Contract Design}{32}{subsection.3.7}%
+\contentsline {subsubsection}{\numberline {3.7.1}Core Functions}{33}{subsubsection.3.7.1}%
+\contentsline {subsubsection}{\numberline {3.7.2}Soulbound Enforcement}{33}{subsubsection.3.7.2}%
+\contentsline {section}{\numberline {4}Implementation}{33}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Development Environment}{33}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Smart Contract Implementation}{35}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Front-end Implementation}{37}{subsection.4.3}%
+\contentsline {subsubsection}{\numberline {4.3.1}Admin Console - Create Student Account}{37}{subsubsection.4.3.1}%
+\contentsline {subsubsection}{\numberline {4.3.2}Student onboard email}{38}{subsubsection.4.3.2}%
+\contentsline {subsubsection}{\numberline {4.3.3}Student Login}{38}{subsubsection.4.3.3}%
+\contentsline {subsubsection}{\numberline {4.3.4}Student submits personal wallet address}{39}{subsubsection.4.3.4}%
+\contentsline {subsubsection}{\numberline {4.3.5}Admin Console - Check for graduation}{39}{subsubsection.4.3.5}%
+\contentsline {subsubsection}{\numberline {4.3.6}Admin Console - Mint graduate certificate}{39}{subsubsection.4.3.6}%
+\contentsline {subsubsection}{\numberline {4.3.7}Certificate Search}{41}{subsubsection.4.3.7}%
+\contentsline {subsection}{\numberline {4.4}Back-end API}{43}{subsection.4.4}%
+\contentsline {subsection}{\numberline {4.5}IPFS Integration}{44}{subsection.4.5}%
+\contentsline {subsection}{\numberline {4.6}Wallet Integration}{45}{subsection.4.6}%
+\contentsline {subsection}{\numberline {4.7}Smart Contract Security Analysis}{46}{subsection.4.7}%
+\contentsline {subsubsection}{\numberline {4.7.1}Unauthorized Minting Prevention}{46}{subsubsection.4.7.1}%
+\contentsline {subsubsection}{\numberline {4.7.2}Duplicate Certificate Prevention}{48}{subsubsection.4.7.2}%
+\contentsline {subsubsection}{\numberline {4.7.3}Soulbound Enforcement}{50}{subsubsection.4.7.3}%
+\contentsline {subsubsection}{\numberline {4.7.4}Hash Tampering Protection}{52}{subsubsection.4.7.4}%
+\contentsline {subsubsection}{\numberline {4.7.5}Wallet Ownership Security}{55}{subsubsection.4.7.5}%
+\contentsline {subsection}{\numberline {4.8}Deployment Process}{58}{subsection.4.8}%
+\contentsline {subsubsection}{\numberline {4.8.1}Hardhat Local Deployment}{58}{subsubsection.4.8.1}%
+\contentsline {subsubsection}{\numberline {4.8.2}Smart Contract Compilation}{59}{subsubsection.4.8.2}%
+\contentsline {subsubsection}{\numberline {4.8.3}Smart Contract Ledger Deployment}{60}{subsubsection.4.8.3}%
+\contentsline {subsubsection}{\numberline {4.8.4}Environment Syncing and System State Configuration}{61}{subsubsection.4.8.4}%
+\contentsline {subsubsection}{\numberline {4.8.5}Frontend side for user interface}{62}{subsubsection.4.8.5}%
+\contentsline {section}{\numberline {5}AI-Assisted NFT Certificate Verification}{63}{section.5}%
+\contentsline {subsection}{\numberline {5.1}AI Asisstant Concept}{63}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}AI Technology Stack}{63}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}System Architecture and Workflow}{64}{subsection.5.3}%
+\contentsline {subsubsection}{\numberline {5.3.1}Step 1 – Certificate Verification}{65}{subsubsection.5.3.1}%
+\contentsline {subsubsection}{\numberline {5.3.2}Step 2 – User Question Submission}{65}{subsubsection.5.3.2}%
+\contentsline {subsubsection}{\numberline {5.3.3}Step 3 – Context Construction}{67}{subsubsection.5.3.3}%
+\contentsline {subsubsection}{\numberline {5.3.4}Step 4 – AI Processing}{67}{subsubsection.5.3.4}%
+\contentsline {subsubsection}{\numberline {5.3.5}Step 5 – Response Streaming}{68}{subsubsection.5.3.5}%
+\contentsline {subsection}{\numberline {5.4}AI Service Implementation}{68}{subsection.5.4}%
+\contentsline {subsection}{\numberline {5.5}Prompt Engineering and Hallucination Mitigation}{69}{subsection.5.5}%
+\contentsline {section}{\numberline {6}Results \& Conclusion}{70}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Project Results}{70}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Project Advantages}{71}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Project Limitations}{72}{subsection.6.3}%
+\contentsline {subsection}{\numberline {6.4}Future Work}{73}{subsection.6.4}%
+\contentsline {subsubsection}{\numberline {6.4.1}Blockchain-Based Academic Transcript Verification}{73}{subsubsection.6.4.1}%
+\contentsline {subsubsection}{\numberline {6.4.2}Institution-Specific Large Language Model Development}{74}{subsubsection.6.4.2}%
+\contentsline {subsection}{\numberline {6.5}Source Code Repository}{75}{subsection.6.5}%
+\contentsline {subsection}{\numberline {6.6}Conclusion}{75}{subsection.6.6}%

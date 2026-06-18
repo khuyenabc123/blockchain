@@ -1,0 +1,58 @@
+This is BibTeX, Version 0.99d (TeX Live 2023/Debian)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: main.aux
+The style file: IEEEtran.bst
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Database file #1: references.bib
+-- IEEEtran.bst version 1.14 (2015/08/26) by Michael Shell.
+-- http://www.michaelshell.org/tex/ieeetran/bibtex/
+-- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
+Warning--missing institution in daoattack2017
+
+Done.
+You've used 37 entries,
+            4087 wiz_defined-function locations,
+            1010 strings with 14253 characters,
+and the built_in function-call counts, 21137 in all, are:
+= -- 1704
+> -- 530
+< -- 96
++ -- 286
+- -- 120
+* -- 995
+:= -- 3558
+add.period$ -- 74
+call.type$ -- 37
+change.case$ -- 37
+chr.to.int$ -- 234
+cite$ -- 38
+duplicate$ -- 1576
+empty$ -- 1689
+format.name$ -- 128
+if$ -- 4721
+int.to.chr$ -- 0
+int.to.str$ -- 37
+missing$ -- 316
+newline$ -- 188
+num.names$ -- 37
+pop$ -- 824
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 2
+skip$ -- 1591
+stack$ -- 0
+substring$ -- 615
+swap$ -- 1126
+text.length$ -- 18
+text.prefix$ -- 0
+top$ -- 5
+type$ -- 37
+warning$ -- 1
+while$ -- 69
+width$ -- 39
+write$ -- 408
+(There was 1 warning)
