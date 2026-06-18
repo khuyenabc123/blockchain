@@ -1,0 +1,90 @@
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+    font=\small,
+    node distance=0.8cm and 2.5cm,
+    start_end/.style={
+        draw, 
+        rectangle, 
+        rounded corners=10pt, 
+        minimum width=2cm, 
+        minimum height=0.6cm,
+        line width=0.8pt, 
+        align=center
+    },
+    action/.style={
+        draw, 
+        rectangle, 
+        rounded corners=3pt, 
+        minimum width=4.8cm, 
+        minimum height=0.8cm,
+        line width=0.8pt, 
+        align=center
+    },
+    decision/.style={
+        draw, 
+        diamond, 
+        aspect=2, 
+        minimum width=4.5cm, 
+        minimum height=0.9cm,
+        line width=0.8pt, 
+        align=center, 
+        inner sep=0pt
+    },
+    arrow/.style={
+        ->, 
+        >=Stealth, 
+        line width=0.8pt, 
+        draw
+    }
+]
+
+    \node [start_end] (start) {Start: Verifier enters query\\into AI Interface};
+    
+    \node [action, below=of start] (parse) {AI Agent parses natural language text};
+    \node [action, below=of parse] (extract) {Extract Token ID / Student Address\\parameters};
+    \node [action, below=of extract] (lookup) {Execute state lookup call\\against Smart Contract};
+    
+    \node [decision, below=of lookup] (check_id) {Is Token ID\\Valid \& Active?};
+    
+    \node [action, right=of check_id, minimum width=3.2cm] (fraud) {Display Fraud\\Alert};
+    
+    \node [action, below=of check_id, yshift=-0.2cm] (fetch) {Fetch off-chain Metadata\\JSON from IPFS};
+    \node [action, below=of fetch] (sig_check) {Verify University\\Cryptographic Signature};
+    
+    \node [decision, below=of sig_check] (check_sig) {Does Signature\\Match Admin?};
+    
+    \node [action, right=of check_sig, minimum width=3.2cm] (tampered) {Display Tampered\\Alert};
+    
+    \node [action, below=of check_sig, yshift=-0.2cm] (display) {Display Certificate\\Information Profile};
+    
+    \node [start_end, right=of display] (end) {End};
+
+    
+    \draw [arrow] (start) -- (parse);
+    \draw [arrow] (parse) -- (extract);
+    \draw [arrow] (extract) -- (lookup);
+    \draw [arrow] (lookup) -- (check_id);
+    
+  
+    \draw [arrow] (check_id) -- node[above, font=\bfseries\scriptsize, near start] {No} (fraud);
+    \draw [arrow] (check_id) -- node[left, font=\bfseries\scriptsize, near start] {Yes} (fetch);
+    
+ 
+    \draw [arrow] (fetch) -- (sig_check);
+    \draw [arrow] (sig_check) -- (check_sig);
+    
+ 
+    \draw [arrow] (check_sig) -- node[above, font=\bfseries\scriptsize, near start] {No} (tampered);
+    \draw [arrow] (check_sig) -- node[left, font=\bfseries\scriptsize, near start] {Yes} (display);
+    
+
+    \draw [arrow] (display) -- (end);
+    
+
+    \draw [arrow] (fraud.east) -- ++(1.3cm,0) |- (end.east);
+    \draw [arrow] (tampered.east) -- ++(1cm,0) |- (end.east);
+
+\end{tikzpicture}
+\caption{Activity Diagram}
+\end{figure}
