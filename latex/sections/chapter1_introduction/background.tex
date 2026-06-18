@@ -1,0 +1,25 @@
+\subsection{Background}
+
+Verifying school certificates is still something every employer and university has to do. When people apply for jobs or higher education, someone has to check if their degrees are actually real or just faked. Right now, most places handle this by using centralized databases, sending manual emails, or waiting on paperwork. It is a slow setup that often takes days just to verify a single document.\\
+
+These traditional habits are common everywhere, but they cause a lot of bottleneck issues, especially in places like Vietnam. For example, if you need to notarize a college degree or a transcript here, you usually have to take a photocopy down to a local government office or a notary place just to prove it matches the original. It takes time. The whole process gets dragged out because office staff are buried in paperwork, rules are too strict, or the schools themselves cannot easily dig up old student files. On top of that, relying on one central database is risky. If a university's server goes down, gets corrupted, or loses old records over time, proving your degree is real becomes almost impossible. This makes the whole setup an easy target for fraud.\\
+
+Looking closely at traditional verification, the main weaknesses usually come down to three basic problems:
+
+\begin{itemize}
+
+    \item \textbf{Single Points of Failure:} Putting everything on a central university server is a big risk. Servers crash, get hit by cyberattacks, or experience data loss. If a database gets hacked and there is no separate backup system, important student records can be wiped out permanently. There is also the risk of internal staff altering data maliciously.
+
+    \item \textbf{High Delays and Inefficiency:} Checking a degree gets even slower when it involves different countries. HR managers often have to email foreign schools back and forth. Because you have to deal with international privacy laws, extra fees, and slow administrative steps, the process takes forever. This leaves job applicants stuck waiting for weeks just to get approved.
+
+    \item \textbf{Blind Trust in System Admins:} Centralized systems force you to trust whoever runs the database. If an insider with system access wants to be dishonest, they can easily change grades or slip in a fake degree entry. Since outside employers can only see the final screen output, catching this kind of internal tampering is nearly impossible.
+
+\end{itemize}
+
+To fix these exact weak spots, blockchain technology offers a much better, decentralized way to handle data. Think of a blockchain as a shared digital ledger. Once a record is saved on it, nobody can change it unless the whole network agrees. That specific feature is why it works so well for keeping data secure and completely transparent.\\
+
+Inside the blockchain ecosystem, Non-Fungible Tokens (NFTs) can be used to handle unique digital ownership. When applied to education, an NFT acts like a digital badge issued directly from a university to a graduate's wallet. Unlike a plain PDF file, an NFT-based certificate uses cryptographic signatures to prove exactly who owns it and where it came from.\\
+
+The actual workflow connects the digital certificate to the official school record using a hashing method called SHA-256. The system runs the original certificate file through this tool to generate a unique digital code—a hash—and uploads that code to the blockchain. Later, if an employer wants to check the file, they just upload it to calculate the code again. If the new code matches the original one stored by the university, the degree is instantly verified. If anyone changes even a single letter on the document, the hash changes completely, and the system flags it as a fake right away.\\
+
+In short, bringing blockchain and NFTs into certificate management fixes the structural flaws of old verification setups. It makes the whole process faster, safer, and completely open, meaning we no longer have to blindly trust a centralized office.
