@@ -1,0 +1,153 @@
+\subsection{Deployment Process}
+
+To validate the operational capabilities, structural safety gates, and data persistence pipelines of the decentralized academic registry, a comprehensive multi-tier local deployment was carried out. The execution infrastructure leverages an isolated, high-performance local Ethereum virtual machine (EVM) node powered by the Hardhat Development Framework running on an Ubuntu environment.\\
+
+By prioritizing a fully simulated, low-latency local node over a live public testnet (such as Sepolia), the development pipeline minimizes transaction confirmation latency, eliminates the volatility of testnet gas pricing, and ensures a deterministic sandbox environment for testing edge-case boundary conditions, such as malicious duplicate data submission and cross-tier API state syncing.
+
+\subsubsection{Hardhat Local Deployment}
+
+The foundational phase of the deployment lifecycle requires bootstrapping a local standalone Ethereum node instance. This virtual environment acts as an isolated, single-node private blockchain ledger running in the background of the development machine.\\
+
+\textbf{Execution Process}
+
+To spin up the internal EVM execution environment, a clean terminal instance is instantiated inside the core workspace directory, and the Hardhat node task runner is executed via the node package executor:
+
+\begin{lstlisting}[language=bash, style=codeStyle]
+    cd ~/Desktop/blockchain/nft-cert/backend
+    npx hardhat node
+\end{lstlisting}
+
+\textbf{Technical Functionality and Allocation}
+
+Upon execution, the Hardhat engine instantiates an in-memory blockchain node listening on the local host loopback adapter at \path{http://127.0.0.1:8545}. The node dynamically pre-generates 20 distinct cryptographic developer accounts. Each account is automatically provisioned with a virtual balance of \texttt{10,000 ETH} to facilitate gas payment calculations across subsequent transaction blocks.\\
+
+Crucially, the initialization sequence exposes the raw unencrypted Private Keys and matching Public Hex Addresses of these accounts to the console, allowing the first account (\texttt{Account \#0}) to be instantly mapped as the central university registry administrator (\texttt{onlyOwner}), while secondary accounts are reserved for student identity mapping and malicious signature testing.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{images/hardhat_node.png}
+    \caption{Initialization Logs of the Local Hardhat EVM Node}
+    \label{fig:hardhat_node}
+\end{figure}
+
+\subsubsection{Smart Contract Compilation}
+
+Before human-readable Solidity programming patterns can be recognized or processed by the local Hardhat EVM node, the source file code must be transformed into low-level machine components.
+
+\begin{lstlisting}[
+        language=bash,
+        style=codeStyle
+    ]
+    npx hardhat compile
+\end{lstlisting}
+
+The Hardhat compilation suite initializes the Solc (Solidity Compiler) version 0.8.19 engine, running a parsing pass over \path{AcademicCertificate.sol} along with its inherited dependencies from the OpenZeppelin v4 framework library (\texttt{ERC721.sol}, \texttt{Ownable.sol}). The parsing compiler breaks the source code down into two discrete, high-value asset structures stored inside the local \path{/artifacts} system folder:
+
+\begin{itemize}
+    \item \textbf{The Application Binary Interface (ABI)}: A comprehensive JSON-formatted schema mapping file that explicitly documents every function signature, argument array, mutability state, and event tracking structure exposed by the contract. The frontend and backend tiers parse this JSON file to learn exactly how to format data packets before sending them across the JSON-RPC highway.
+    \item \textbf{The EVM Bytecode}: A highly optimized stream of raw hexadecimal operation instructions (opcodes). This bytecode represents the physical application blueprint that is permanently written into the immutable storage state of the blockchain during deployment.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{images/hardhat_compile.png}
+    \caption{Hardhat Compiler Output Confirmation Panel}
+    \label{fig:hardhat_compile}
+\end{figure}
+
+\subsubsection{Smart Contract Ledger Deployment}
+
+The automated deployment tracking script is executed using the \path{--network localhost} flag, instructing Hardhat to bypass its transient in-memory node and target the active persistent loopback server established in Step 1:
+
+\begin{lstlisting}[
+        language=bash,
+        style=codeStyle
+    ]
+    npx hardhat run scripts/deploy.ts --network localhost
+\end{lstlisting}
+
+\begin{itemize}
+    \item \textbf{The Deployment Transaction}: The script \path{deploy.ts} instantiates an automated contract factory instance utilizing the account signature of \texttt{Account \#0}. It frames a specialized transaction payload where the destination (\texttt{to} field) is set to a null state (\texttt{0x000...000}), and the data payload field contains the entire compiled contract bytecode.
+    \item \textbf{State Storage Anchor}: The local node processes the block, calculates the required creation gas overhead, and computes a deterministic cryptographic address for the contract based on the deployer's public address and transaction nonce.
+    \item \textbf{Environmental Mapping Sync}: The console prints the live contract address. As outlined in the architecture requirements, this generated address string must be manually copied and updated inside the \path{backend/.env} file environment variables array (\path{CONTRACT_ADDRESS=0x5FbDB2315678afecb367f032d93F642f64180aa3}). This update ensures the backend Express server knows exactly which address to hit on-chain when a recruiter requests record validation.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{images/hardhat_deploy.png}
+    \caption{Terminal Receipt of Successful Contract Ledger Deployment}
+    \label{fig:hardhat_deploy}
+\end{figure}
+
+\subsubsection{Environment Syncing and System State Configuration}
+
+With the smart contract live on the local node network, the next phase bridges the blockchain layer with the off-chain backend architecture. The deployment process utilizes environment variables to securely store the contract's address, ensuring the application code remains completely modular.\\
+
+\textbf{1. Environmental Address Mapping Synchronization}\\
+
+The operational configuration variables are structured across four specific functional layers within the backend runtime space:
+
+\begin{itemize}
+    \item \textbf{EVM Network Provider Settings}: Links the server directly to the active Hardhat loopback adapter engine (\path{RPC_URL=http://127.0.0.1:8545}) and declares the dynamic on-chain deployment target destination (\path{CONTRACT_ADDRESS=0x5FbDB2315678afecb367f032d93F642f64180aa3}). Administrative authorization is simulated using the node's initial pre-allocated structural private key (\path{PRIVATE_KEY=0xac0974bec3...}).
+    \item \textbf{Decentralized Cloud Storage Pipeline}: Establishes connection criteria to the Pinata IPFS protocol gateway (\path{PINATA_URL}) using an authenticated JSON Web Token bearer signature string (\path{PINATA_JWT}). This allows the server to programmatically pin immutable JSON metadata assets directly to the decentralized peer-to-peer storage fabric.
+    \item \textbf{Persistent Database Tier}: Configures connection criteria to a remote cloud storage infrastructure using an authenticated MongoDB Atlas shared cluster link endpoint (\path{MONGO_URI}).
+    \item \textbf{Automated Notification Infrastructure}: Integrates transaction log notifications directly into an external Simple Mail Transfer Protocol gateway routing network (\path{EMAIL_HOST=smtp.gmail.com}). This service automatically coordinates asynchronous notification dispatches to graduates when a block transaction completes successfully.
+\end{itemize}
+
+\begin{lstlisting}[
+        language=bash,
+        style=codeStyle
+    ]
+    PORT=5000
+    FE_URL=http://localhost:5173
+    MONGO_URI=mongodb+srv://huynhbaokhuyen123_db_user:[HIDDEN]@cluster0.30cfhmt.mongodb.net/
+    CONTRACT_ADDRESS=0x5FbDB2315678afecb367f032d93F642f64180aa3
+    RPC_URL=http://127.0.0.1:8545
+    PINATA_JWT=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+    PRIVATE_KEY=0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80
+    EMAIL_HOST=smtp.gmail.com
+    EMAIL_PORT=587
+    EMAIL_USER=huynhbaokhuyen123@gmail.com
+    PINATA_URL=https://gateway.pinata.cloud/ipfs
+    GROQ_API_KEY=gsk_yPlAcAGCutxNm4hQVRc2...
+\end{lstlisting}
+
+\textbf{2. Backend Application Service Boot Sequence}\\
+
+With the decoupled environment profiles locked in, an active process thread is instantiated inside the \path{/backend} development path to mount the Node.js TypeScript compilation engine:
+
+\begin{lstlisting}[
+        language=bash,
+        style=codeStyle
+    ]
+    cd backend
+    npm run dev
+\end{lstlisting}
+
+Upon bootstrapping, the server parses the system parameters array to safely bind its application components. The engine initializes a persistent database listener loop to the MongoDB cloud cluster, connects an internal instance of the \path{ethers.JsonRpcProvider} hook directly to your Hardhat engine, and opens a public HTTP network socket listener on port 5000.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{images/be_run.png}
+    \caption{Express REST API Server Initialization Log Sequence}
+    \label{fig:be_run}
+\end{figure}
+
+\subsubsection{Frontend side for user interface}
+
+We also need an UI for interact, so this section for how to run the frontend.
+
+\begin{lstlisting}[
+        language=bash,
+        style=codeStyle
+    ]
+    cd frontend
+    npm run dev
+\end{lstlisting}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{images/frontend_run.png}
+    \caption{Run Front-end}
+    \label{fig:be_run}
+\end{figure}

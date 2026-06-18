@@ -1,0 +1,90 @@
+\subsection{Smart Contract Implementation}
+
+The smart contract is responsible for issuing and storing immutable academic certificate records on the blockchain.
+
+\begin{lstlisting}[
+        language=typescript, 
+        caption={Mint Certificate},
+        style=codeStyle
+    ]
+    function mintCertificate(
+        address student,
+        string memory studentId,
+        string memory studentName,
+        string memory degree,
+        string memory major,
+        string memory ipfsHash,
+        string memory fileHash
+    ) public onlyOwner {
+        require(hashToTokenId[fileHash] == 0, "A certificate with this file hash already exists");
+
+        uint256 tokenId = ++nextTokenId;
+
+        _safeMint(student, tokenId);
+
+        certificates[tokenId] = Certificate(
+            studentId,
+            studentName,
+            degree,
+            major,
+            ipfsHash,
+            block.timestamp,
+            false,
+            0,
+            "",
+            fileHash
+        );
+
+        hashToTokenId[fileHash] = tokenId;
+
+        emit CertificateMinted(
+            tokenId,
+            student,
+            studentId,
+            studentName,
+            degree,
+            major,
+            ipfsHash,
+            block.timestamp,
+            fileHash
+        );
+    }
+\end{lstlisting}
+
+\begin{lstlisting}[
+        language=typescript, 
+        caption={Get Certificate},
+        style=codeStyle
+    ]
+    function getCertificateByHash(
+        string memory fileHash
+    ) public view returns (
+        uint256 tokenId,
+        string memory studentId,
+        string memory studentName,
+        string memory degree,
+        string memory major,
+        string memory ipfsHash,
+        uint256 issueDate,
+        bool isRevoked,
+        uint256 revokedAt,
+        string memory revocationReason
+    ) {
+        uint256 id = hashToTokenId[fileHash];
+        require(id > 0, "No certificate matches this file hash");
+        
+        Certificate memory cert = certificates[id];
+        return (
+            id,
+            cert.studentId,
+            cert.studentName,
+            cert.degree,
+            cert.major,
+            cert.ipfsHash,
+            cert.issueDate,
+            cert.isRevoked,
+            cert.revokedAt,
+            cert.revocationReason
+        );
+    }
+\end{lstlisting}

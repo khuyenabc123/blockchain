@@ -1,0 +1,109 @@
+\subsection{IPFS Integration}
+
+To eliminate dependence on centralized file storage and improve certificate integrity, the proposed system utilizes the InterPlanetary File System (IPFS) through the Pinata gateway service. Both the generated certificate PDF and its associated metadata are stored in decentralized content-addressed storage.\\
+
+When a certificate is issued, the backend first generates a PDF document containing the student's academic information.
+
+\begin{lstlisting}[
+        language=typescript, 
+        caption={Generate PDF file},
+        style=codeStyle
+    ]
+    const certificatePayload = {
+        studentWallet: student.studentWallet,
+        studentId: student.studentId,
+        studentName: student.studentName,
+        degree,
+        major,
+        graduationDate,
+        issuedBy,
+    };
+
+    const pdfBuffer = await generateCertificatePDFBuffer(certificatePayload);
+\end{lstlisting}
+
+A SHA-256 cryptographic hash is then computed from the PDF content to create a unique integrity fingerprint (\texttt{fileHash}). The PDF file is uploaded to IPFS and returns a Content Identifier (\texttt{pdfCID}).
+
+\begin{lstlisting}[
+        language=typescript, 
+        caption={Create file hash and upload PDF to IPFS},
+        style=codeStyle
+    ]
+    const fileHash = crypto
+        .createHash("sha256")
+        .update(pdfBuffer)
+        .digest("hex");
+
+    const pdfCID = await uploadPDFToIPFS(
+        pdfBuffer,
+        `Certificate_${student.studentId}.pdf`,
+    );
+\end{lstlisting}
+
+After obtaining the PDF CID, the system constructs a metadata JSON object containing descriptive information, certificate attributes, the PDF reference, and the integrity hash:
+
+\begin{lstlisting}[
+        language=json, 
+        caption={Metadata JSON},
+        style=codeStyle
+    ]
+    { 
+        "name": "Academic Certificate - Huynh Thi Luu", 
+        "description": "Official decentralized educational degree issued by University Administrator.", 
+        "pdfCID": "QmXXXXXX", 
+        "fileHash": "18d367c6xxxx", "attributes": [ 
+            { 
+                "trait_type": "Student ID", 
+                "value": "SE12345" 
+            }, 
+            { 
+                "trait_type": "Degree", 
+                "value": "Bachelor" 
+            }, 
+            { 
+                "trait_type": "Major", 
+                "value": "Computer Science"            
+            }, 
+            { 
+                "trait_type": "Graduation Date", 
+                "value": "2026-03-03" 
+            } 
+        ] 
+    }
+\end{lstlisting}
+
+The metadata object is subsequently uploaded to IPFS, producing a second Content Identifier (metadataCID). During the NFT minting process, the smart contract permanently records the metadata CID and file hash on the blockchain.
+
+\begin{lstlisting}[
+        language=typescript, 
+        caption={Create file hash and upload PDF to IPFS},
+        style=codeStyle
+    ]
+    const tx = await certificateContract.mintCertificate(
+        student.studentWallet,
+        student.studentId,
+        student.studentName,
+        degree,
+        major,
+        metadataCID,
+        fileHash,
+    );
+
+    const receipt = await tx.wait();
+\end{lstlisting}
+
+Because IPFS employs content-addressed storage, any modification to either the certificate PDF or metadata file results in a completely different CID value. This mechanism provides tamper resistance and enables independent verification of certificate authenticity. The resulting architecture follows a hierarchical decentralized storage model:
+
+\begin{center}
+    NFT
+    $\rightarrow$
+    Metadata CID
+    $\rightarrow$
+    Metadata JSON
+    $\rightarrow$
+    PDF CID
+    $\rightarrow$
+    Certificate PDF
+\end{center}
+
+This design separates ownership information from certificate content while ensuring that both remain permanently verifiable through blockchain and IPFS technologies.
