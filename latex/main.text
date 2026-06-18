@@ -1,0 +1,303 @@
+% !TeX root = main.tex
+
+\documentclass[12pt]{article}
+
+\usepackage[a4paper, margin=2.5cm]{geometry}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T5]{fontenc}
+\usepackage{fontspec} 
+\setmainfont{Times New Roman}
+\usepackage{microtype}
+
+
+\makeatletter
+\renewcommand{\section}{\@startsection{section}{1}{\z@}%
+    {-3.5ex \@plus -1ex \@minus -.2ex}%
+    {2.3ex \@plus .2ex}%
+    {\normalfont\large\bfseries\MakeUppercase}}
+\makeatother
+
+\usepackage{listings}
+\usepackage{xcolor}
+\definecolor{jsonpurple}{rgb}{0.5,0.0,0.5}
+\definecolor{jsoncyan}{rgb}{0.0,0.6,0.6}
+\definecolor{jsongray}{rgb}{0.4,0.4,0.4}
+\definecolor{jsonamber}{rgb}{0.8,0.4,0.0}
+
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{pgfplots}
+\usepackage[english]{babel}
+\usepackage{xurl}
+\usepackage{dblfloatfix}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{enumitem}
+\usepackage{cellspace}
+\usepackage{pgf-umlsd}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+
+\fancyhead[L]{\textcolor{darkgray}{\small Non-Fungible Token for Academic Certification}}
+\fancyhead[R]{\textcolor{darkgray}{\small \thepage}}
+
+\fancyfoot[L]{\textcolor{darkgray}{\small Huynh Thi Bao Khuyen}}
+\fancyfoot[C]{}
+\fancyfoot[R]{\textcolor{darkgray}{\small \thepage}}
+
+\renewcommand{\headrule}{\hbox to\headwidth{\color{gray}\leaders\hrule height \headrulewidth\hfill}}
+\renewcommand{\footrule}{\hbox to\headwidth{\color{gray}\leaders\hrule height \footrulewidth\hfill}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\setlength{\extrarowheight}{6pt}
+\setlength{\tabcolsep}{10pt}
+\renewcommand{\arraystretch}{1.4}
+\renewcommand{\tabularxcolumn}[1]{m{#1}}
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}
+\newcommand{\headercell}[1]{\multicolumn{1}{>{\centering\arraybackslash}X|}{\textbf{#1}}}
+\newcommand{\firstheadercell}[1]{\multicolumn{1}{|>{\centering\arraybackslash}m{3.5cm}|}{\textbf{#1}}}
+
+\usepackage{hyperref}
+\urlstyle{same}
+\pgfplotsset{compat=1.18}
+
+\definecolor{primaryblue}{RGB}{41, 128, 185}
+\definecolor{darkgray}{RGB}{44, 62, 80}
+\definecolor{orangeverif}{RGB}{211, 84, 0}
+\definecolor{lightgraybg}{RGB}{245, 247, 250}
+
+\lstdefinestyle{codeStyle}{
+    basicstyle=\ttfamily\footnotesize,
+    breaklines=true,
+    columns=fullflexible,
+    keepspaces=true,
+    frame=single,
+    showstringspaces=false,
+    tabsize=4,
+    aboveskip=6pt,
+    belowskip=6pt
+}
+
+\lstdefinelanguage{Solidity}{
+    keywords={
+        contract,pragma,import,function,event,mapping,
+        uint256,address,bool,string,public,private,
+        external,internal,view,pure,returns,modifier,
+        require,emit,constructor
+    },
+    sensitive=true,
+    comment=[l]{//},
+    morecomment=[s]{/*}{*/},
+    morestring=[b]",
+}
+
+\lstdefinelanguage{typeScript}{
+    keywords={
+        break,case,catch,class,const,continue,default,
+        delete,do,else,export,extends,false,finally,
+        for,function,if,import,in,instanceof,new,null,
+        return,super,switch,this,throw,true,try,typeof,
+        var,void,while,let,async,await,interface,
+        implements,public,private,protected
+    },
+    sensitive=true,
+    comment=[l]{//},
+    morecomment=[s]{/*}{*/},
+    morestring=[b]",
+}
+
+\lstdefinelanguage{json}{
+    basicstyle=\ttfamily\footnotesize,
+    showstringspaces=false,
+    breaklines=true,
+    morestring=[b]",
+}
+
+\lstdefinelanguage{bash}{
+    sensitive=true,
+    comment=[l]{\#},
+    morestring=[b]",
+    morestring=[b]'
+}
+
+\usetikzlibrary{
+    arrows.meta,
+    positioning,
+    shapes.geometric,
+    shapes.multipart,
+    fit,
+    calc,
+    backgrounds
+}
+
+\begin{document}
+
+\begin{titlepage}
+
+    \begin{tikzpicture}[remember picture, overlay]
+        \draw[line width=2pt, color=darkgray]
+        ($(current page.north west)+(1cm,-1cm)$)
+        rectangle
+        ($(current page.south east)+(-1cm,1cm)$);
+    \end{tikzpicture}
+
+    \centering
+    \vspace*{2cm}
+    {\large \textbf{DUY TAN UNIVERSITY} \par}
+    {\small \textbf{SCHOOL OF COMPUTER SCIENCE \& ARTIFICIAL INTELLIGENT} \par}
+
+    \vfill
+    {\LARGE \textbf{Non-Fungible Token for Academic Certification} \par}
+    \vspace{0.5cm}
+    {\large \textit{Course Report} \par}
+    \vfill
+
+    \begin{flushleft}
+        \textbf{Class:} Blockchain \\
+        \textbf{Teacher:} Professor Doctor Anand Nayyar \\
+    \end{flushleft}
+
+    \vfill
+
+    \begin{flushright}
+        \textbf{Master Student:}\\
+        {\large Huynh Thi Bao Khuyen}
+    \end{flushright}
+    \vspace{1cm}
+\end{titlepage}
+
+\newpage
+\pagenumbering{arabic}
+
+%====================================================
+\section*{Acknowledgement}
+\addcontentsline{toc}{section}{Acknowledgement}
+
+I would like to express my sincere gratitude to Professor Dr. Anand Nayyar for teaching the Blockchain course and for providing the knowledge, learning materials, and guidance that supported the development of this project. I would also like to thank Duy Tan University and the School of Computer Science and Artificial Intelligence for providing the necessary learning environment and resources to complete this work. In addition, I would like to thank the authors of the research papers, technical documents, and open-source projects cited throughout this project. Their contributions have provided valuable insights into blockchain technology, smart contracts, NFTs, decentralized storage, and AI-powered systems. This project has provided valuable practical experience and enhanced my understanding of blockchain-based application development and academic degree verification systems.\\
+
+Huynh Thi Bao Khuyen
+
+Duy Tan University
+
+June 2026
+
+\newpage
+
+
+\renewcommand{\contentsname}{TABLE OF CONTENTS}
+\tableofcontents
+\newpage
+
+%====================================================
+\section{Introduction}
+\input{sections/chapter1_introduction/background}
+
+\input{sections/chapter1_introduction/problem_statement}
+
+\input{sections/chapter1_introduction/objectives}
+
+\input{sections/chapter1_introduction/scope}
+
+\input{sections/chapter1_introduction/research_method}
+%====================================================
+\section{Literature review \& Theoretical background}
+\input{sections/chapter2_literature_review/blockchain_fudamental}
+
+\input{sections/chapter2_literature_review/smart_contract}
+
+\input{sections/chapter2_literature_review/solidity}
+
+\input{sections/chapter2_literature_review/nft}
+
+\input{sections/chapter2_literature_review/academic_certificate}
+
+\input{sections/chapter2_literature_review/compare_papers}
+%====================================================
+\section{System analysis \& Design}
+
+The previous chapters discussed the fundamental concepts that form the basis of this project, including blockchain technology, smart contracts, decentralized storage, and Soulbound Tokens. Building on these concepts, this chapter presents the design and implementation of the proposed blockchain-base NFTs for academic certificates verification system.\\
+
+The chapter begins by examining the limitations of traditional certificate management and verification methods. It then describes the proposed system architecture, including the integration of smart contracts, IPFS-based storage, and an AI-assisted verification interface. Finally, the operational workflow of the system is presented to illustrate how academic certificates are issued, stored, and verified in a decentralized environment.
+
+\input{sections/chapter3_system_analysis/propose_system}
+
+\input{sections/chapter3_system_analysis/architecture_diagram}
+
+\input{sections/chapter3_system_analysis/usecase_diagram}
+
+\input{sections/chapter3_system_analysis/sequence_diagram}
+
+\input{sections/chapter3_system_analysis/activity_diagram}
+
+\input{sections/chapter3_system_analysis/database_diagram}
+
+\input{sections/chapter3_system_analysis/smart_contract_desgin}
+
+
+%====================================================
+\section{Implementation}
+
+\input{sections/chapter4_implementation/development_environment}
+
+\input{sections/chapter4_implementation/smart_contract_implement}
+
+\input{sections/chapter4_implementation/frontend_architecture}
+
+\input{sections/chapter4_implementation/backed_architect}
+
+\input{sections/chapter4_implementation/admin_system}
+
+\input{sections/chapter4_implementation/ipfs_integration}
+
+\input{sections/chapter4_implementation/wallet_integration}
+
+\input{sections/chapter4_implementation/smart_contract_security}
+
+\input{sections/chapter4_implementation/deployment_process}
+
+\input{sections/chapter4_implementation/system_testing}
+
+\input{sections/chapter4_implementation/preformance_evaluation}
+
+%====================================================
+\section{AI-Assisted NFT Certificate Verification}
+
+\input{sections/chapter5_ai_agent/ai_assistant_concept}
+\input{sections/chapter5_ai_agent/ai_techology_stack}
+\input{sections/chapter5_ai_agent/system_architecture}
+\input{sections/chapter5_ai_agent/ai_service_implementation}
+\input{sections/chapter5_ai_agent/prompt_engineering}
+
+
+%====================================================
+\section{Results \& Conclusion}
+
+\input{sections/chapter6_result_discussion/results}
+
+\input{sections/chapter6_result_discussion/advantage}
+
+\input{sections/chapter6_result_discussion/limitations}
+
+\input{sections/chapter6_result_discussion/future_work}
+
+\input{sections/chapter6_result_discussion/source_code_repo.tex}
+
+\input{sections/chapter6_result_discussion/conclusion}
+
+
+
+%====================================================
+\newpage
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+
+\end{document}
