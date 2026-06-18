@@ -1,0 +1,31 @@
+\subsection{Existing Research Papers}
+
+Before discussing the proposed solution, it is important to examine how previous researchers have addressed the problem of academic credential verification using blockchain technology. Existing studies can generally be grouped into two categories: hash-based certificate verification systems and NFT-based credential management systems \cite{kumutha2021blockchainacdaemic}.\\
+
+The below table in the next section provides a comparison of these studies, including their main approaches, contributions, and limitations. This review helps identify the research gaps that the proposed system aims to address.
+\subsubsection{Literature Review Matrix}
+
+\input{tables/compare_papers}
+
+\subsubsection{Identified Research Gaps and Proposed Technical Solutions}
+
+An review of the existing literature highlights several limitations that remain insufficiently addressed by current blockchain-based academic credential systems. The proposed solutions aims to address these challenges through the system design presented in the list below:
+
+\begin{enumerate}
+      \item \textit{Balancing Cost and Interoperability}:\\
+            Many existing solutions are deployed either on public blockchain networks, which may incur transaction fees, or on private blockchain platforms that offer lower operating costs but limited interoperability with external systems. As a result, there is often a trade-off between accessibility, cost, and public verifiability.
+
+            $\Rightarrow$ To address this issue, the proposed system is developed and tested on the Ethereum ecosystem using the Sepolia test network for public blockchain deployment and Hardhat for local development and testing. This approach provides compatibility with widely used blockchain tools while avoiding transaction costs during development.
+
+      \item \textit{Certificate Transferability}:\\
+            Academic certificates represent personal achievements and should remain associated with the individual who earned them. However, standard ERC-721 NFTs are transferable by design, allowing ownership to be moved between wallet addresses.
+
+            $\Rightarrow$ The proposed system modifies the standard ERC-721 implementation by disabling transfer operations. As a result, certificate NFTs function as Soulbound Tokens (SBTs), ensuring that ownership remains permanently linked to the graduate's wallet address.
+
+      \item \textit{Usability of Verification Systems}:\\
+            Several existing blockchain-based verification platforms require users to interact directly with blockchain explorers or understand technical blockchain concepts. This can create challenges for university staff, employers, and other non-technical users who simply need to verify the authenticity of a certificate.
+
+            $\Rightarrow$ To improve usability, the proposed system includes an AI-assisted verification interface that allows users to interpret verify result to easier to understand through a simplified web application. The AI-agent support to use natural language interaction to make the verification process more accessible to non-technical users.
+\end{enumerate}
+
+The proposed system addresses these limitations by combining a non-transferable NFT certificate model with a user-friendly verification platform built on blockchain and decentralized storage technologies.

@@ -1,0 +1,49 @@
+\subsection{Blockchain Fundamentals}
+
+Instead of keeping records on one central machine, blockchain splits that data up across a whole network of computers using distributed ledger technology. Since everyone on the network holds their own exact copy of this ledger, going back and secretly changing or faking a record is incredibly hard without getting the whole network to agree on the change. This unique focus on security explains why blockchain keeps getting picked up for real-world setups in banking, tracking supply chains, digital identity, and even IoT tech\cite{zheng2017blockchain}.
+
+You can essentially picture a blockchain as a shared public record books. Transactions get grouped together into individual blocks, and this chain just keeps growing longer as new blocks get tacked onto the end of it over time. To make sure everything stays accurate and nobody can tamper with the data, the network relies on a mix of asymmetric cryptography and distributed consensus algorithms. When people talk about blockchain's main strengths, they usually point to things like decentralization, permanent records, user anonymity, and audit trails. These exact features are what help companies cut down on extra costs and make verification processes run a whole lot faster.
+
+\subsubsection{Decentralization}
+Most traditional computer setups use an old-school client-server model. In that setup, one company or database manager holds all the keys to the data. That administrator or any user with special rights can easily hop into the database and change things. This setup opens the door to major risks like a single point of failure (SPoF)\cite{yuan2014testing} or internal data fraud. Decentralized networks fix this vulnerability by switching over to a Peer-to-Peer (P2P) setup instead. In a P2P layout, computers talk straight to each other instead of routing everything through a central server\cite{stoica_chord}. Every single computer acts as both a client and a server at the same time, saving its own live copy of the entire ledger. Because of this layout, no single user can log in and rewrite history from their own computer. If you want to change the system state or add new entries, a strict majority of the network has to approve it first. We will break down exactly how this voting process works in Section 2.1.4.
+
+\input{diagrams/centralized_vs_descentralized}
+
+\subsubsection{Blocks}
+A block is really just a data packet used to gather a bunch of transactions or updates together at once. Instead of updating a database line by line, the system bundles records chronologically to make verifying them much easier. Every single block comes with two main pieces: a body and a header. The block body is where the actual transactions sit, along with a counter telling you how many are inside. The total amount of data you can cram into a single block depends entirely on the block size limit and how large each individual transaction happens to be\cite{zheng2017blockchain}. Over in the block header, you will find these specific tracking details:
+
+\begin{itemize}
+    \item Block version: A basic marker showing which exact set of software validation rules the network needs to follow for this block\cite{zheng2017blockchain}.
+
+    \item Merkle tree root hash: This is a single cryptographic code that represents the combined fingerprint of every single transaction packed inside that block\cite{zheng2017blockchain}.
+
+    \item Timestamp: Shows the exact moment the block was created, recorded in seconds since the standard start date of January 1, 1970\cite{zheng2017blockchain}.
+
+    \item nBits: A target number that sets how hard it is to calculate a valid hash for the block\cite{zheng2017blockchain}.
+
+    \item Nonce: A small 4-byte counter variable. It starts off at 0 and ticks up by one every single time the system runs a new hash calculation (more on this in Section III)\cite{zheng2017blockchain}.
+
+    \item Previous block hash: A 256-bit cryptographic signature that points straight back to the block right before it, which is what actually locks the chain together\cite{zheng2017blockchain}.
+\end{itemize}
+
+\input{diagrams/blockchain_architecture}
+
+\input{diagrams/block_properties}
+
+\subsubsection{Hashing}
+Hashing is just a method where you pass any kind of input data through a math formula to spit out a fixed-length text string\cite{yaga2018blockchain}. The moment you run plain text or a file through a hash function, you get a completely unique digital code. Bitcoin and a lot of other big blockchain systems use an algorithm called SHA-256\cite{wikipedia_bitcoin}. It does not matter how big or small your input file is; SHA-256 takes that data and turns it into a standard 256-bit code. The math behind it is incredibly intense, making it practically impossible for regular computers to reverse the hash and figure out what the original file looked like. That said, down the road, breakthroughs in quantum computing might end up threatening the security of these current hashing styles.
+
+\subsubsection{Consensus}
+A consensus mechanism is basically a group protocol used to get an entire network of separate, untrusted computers to agree on one single version of the truth. It completely solves tricky issues like "double-spending" or entering duplicate data entries without needing a boss or a central company to watch over everyone\cite{morel2023bitcoin}.
+
+While developers have come up with several ways to handle consensus—like Proof-of-Work (PoW), Proof-of-Concept (PoC), Proof-of-Stake (PoS), and various mashup models\cite{nguyen2019pos}—the two setups you see used the most are PoW and PoS.
+
+\begin{itemize}
+    \item Proof-of-Work: Network miners grab pending transactions out of a temporary memory pool (mempool) and piece together candidate blocks. Every candidate block is essentially a draft of what could become the next link in the chain. Miners then run a loop where they change a number called a nonce and run the block header through SHA-256 over and over again. They keep doing this until they get a final hash value that drops below the network's current difficulty target\cite{nakamoto2008bitcoin}. The moment a miner hits a winning hash, they blast the block out to the rest of the network. Full nodes then double-check the math on their own, and if it looks good, they add it to their personal copy of the chain.
+
+          \input{diagrams/pow_workflow}
+
+    \item Proof-of-Stake: This setup was built specifically to get around the massive electricity bills and heavy computing power that mining demands. Instead of having computers race each other to solve math puzzles, PoS handpicks block creators (called validators). The system chooses them based on things like how many network coins they have locked up as a deposit, mixed with a bit of random luck\cite{buterin2019casper}. The chosen validator compiles the next block on their own. From there, other network validators check the work, and if they agree it is valid, the block gets officially stamped into the blockchain ledger\cite{nguyen2019pos}\cite{buterin2019casper}.
+
+          \input{diagrams/pos_workflow}
+\end{itemize}

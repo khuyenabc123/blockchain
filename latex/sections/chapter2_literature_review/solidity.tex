@@ -1,0 +1,37 @@
+\subsection{Solidity}
+
+Solidity is the main programming language used to write smart contracts for the Ethereum network. It is a curly-bracket language built specifically to run on the Ethereum Virtual Machine (EVM)\cite{onlinev0835web}. For this certificate project, the code relies heavily on three core Solidity features to handle the logic behind issuing and checking NFTs:
+
+\subsubsection{Global Variables and msg.sender}
+
+Stopping unauthorized users from minting fake certificates is the most critical security rule of this platform. To enforce this, Solidity provides a global variable called \texttt{msg.sender}, which checks the exact blockchain address signing and sending the current transaction\cite{onlinev0835web}. By pairing this variable with a basic conditional check, the contract can lock down sensitive functions:
+
+\noindent
+\begin{lstlisting}[language=solidity,style=codeStyle]
+    modifier onlyAuthorizedAccess() {
+        require(msg.sender == adminAddress, "Error: Unauthorized Caller");
+        _;
+    }
+\end{lstlisting}
+
+With this modifier in place, if anyone besides the official university administrator tries to call the \texttt{mint()} function, the transaction will instantly fail, stop execution, and cancel any changes.
+
+\subsubsection{Mappings for Data Storage}
+
+Old-school verification systems use standard SQL databases to search through student records. Solidity replaces that setup with a built-in key-value data structure called a mapping\cite{onlinev0835web}. To keep track of the issued academic NFTs, the contract uses hash-based mapping tables to organize ownership and metadata:
+
+\noindent
+\begin{lstlisting}[language=solidity,style=codeStyle]
+    mapping(uint256 => address) private _tokenOwners;
+    mapping(uint256 => string) private _tokenURIs;
+\end{lstlisting}
+
+\begin{itemize}
+    \item \texttt{\_tokenOwners}: This connects a specific Certificate Token ID directly to a student's public wallet address. It allows for an incredibly fast $O(1)$ search look-up, meaning anyone can instantly verify who owns a degree without searching through the entire blockchain history.
+
+    \item \texttt{\_tokenURIs}: This links that same Token ID to an immutable IPFS Content Identifier (CID) hash string. This string points to the student's actual degree details, such as their name, major, and graduation date.
+\end{itemize}
+
+\subsubsection{State Variables and Blockchain Storage}
+
+Any variable declared globally at the top of a Solidity contract gets saved directly into persistent blockchain storage (\texttt{storage})\cite{onlinev0835web}. When the university mints an NFT and writes a student's certificate info to this storage space, that data becomes a permanent part of the blockchain history. It cannot be edited, deleted by a corrupt IT worker, or manipulated by a hacker, which guarantees complete and permanent transparency for the degrees.

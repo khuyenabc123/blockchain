@@ -1,0 +1,77 @@
+\subsection{Non-Fungible Token (NFT)}
+
+To get a clear picture of what a Non-Fungible Token actually means, it is easiest to take the name apart and look at the three ideas behind it:
+
+\begin{itemize}
+    \item \textbf{Token}: This is basically a digital asset item locked onto a blockchain setup. It acts as an official receipt showing ownership or specific data values on the shared network\cite{nakamoto2008bitcoin}\cite{wood2008EthereumYellowPaper}.
+
+    \item \textbf{Fungible}: These are standard items where every unit is identical to the next. You can trade one for another easily because they hold the exact same value, just like standard Bitcoin or cash dollars\cite{nakamoto2008bitcoin}\cite{wood2008EthereumYellowPaper}.
+
+    \item \textbf{Non-Fungible}: This means something is one-of-a-kind. It has unique traits, so you cannot swap it out for a replacement item or clone it directly\cite{william2018eip721}.
+\end{itemize}
+
+When you bundle these parts together, an NFT is just a unique digital item tracked by blockchain code that proves you own a specific file or digital record.\\
+
+Using smart contracts and basic mapping logic in Solidity\cite{wood2008EthereumYellowPaper}, our project uses NFTs to turn academic credentials into unique digital assets\cite{ahsan2025shikkachain}. With regular crypto coins like Ether, one coin is exactly the same as another. But with certificate NFTs, every single token has its own data fingerprint on the network\cite{nfterc721web}\cite{william2018eip721}. This setup makes perfect sense for school diplomas. Since an academic achievement belongs to one specific graduate, it should never be mixed up or traded with someone else. A physical degree belongs to one person, and these certificate tokens work the exact same way—pointing directly to a student's file as permanent proof of graduation\cite{glen2022web3soul}\cite{ahsan2025shikkachain}.
+
+\subsubsection{The ERC-721 Token Standard \& Soulbound (SBT) Modifications}
+
+To make sure these tokens actually load properly inside standard crypto wallets and public web pages, we build them using established token standards\cite{william2018eip721}. The standard layout for handling unique assets on EVM networks is the ERC-721 token blueprint\cite{nfterc721web}\cite{william2018eip721}. Essentially, this ERC-721 standard lays out the exact coding rules a smart contract uses to mint, follow, and keep track of digital items\cite{william2018eip721}\cite{openzeppelin2026erc721}:
+
+\input{diagrams/soulbound_mapping}
+
+\begin{itemize}
+    \item \texttt{balanceOf(address owner)}: This function looks up a specific wallet address and tells you exactly how many NFTs are sitting inside it\cite{nfterc721web}.
+
+    \item \texttt{ownerOf(uint256 tokenId)}: You feed this a certificate token ID number, and it tells you the exact wallet address of the owner\cite{nfterc721web}.
+
+    \item \texttt{safeTransferFrom(address from, address to, uint256 tokenId)}: This handles moving an NFT between wallets while making sure the receiving address is capable of accepting ERC-721 assets\cite{nfterc721web}.
+\end{itemize}
+
+The main issue here is that regular ERC-721 tokens are built specifically to be bought and sold. A university degree is a private milestone that nobody should be selling on an open marketplace or giving away to friends. To stop this from happening, our setup alters the standard ERC-721 behavior by stripping out the transfer commands completely. This modifications locks the certificate token to the student's personal wallet forever, turning the asset into a Soulbound Token (SBT)\cite{glen2022web3soul}.\\
+
+\textbf{The Soulbound Constraint Mutation}\newline
+
+While regular profile-picture NFTs rely completely on buying and selling tools to trade on marketplaces\cite{nfterc721web}, university certificates need the exact opposite feature: a total block on movement\cite{glen2022web3soul}\cite{ahsan2025shikkachain}. A graduation degree has to stay anchored to the specific student who actually did the schoolwork\cite{glen2022web3soul}.\\
+
+To build this restriction, the contract overrides an internal EVM function hook called \texttt{\_update()}\cite{openzeppelin2026erc721}. Any time someone tries to move a token using standard transfer methods like \texttt{safeTransferFrom}, the code catches the attempt and checks the wallet destinations\cite{nfterc721web}\cite{openzeppelin2026erc721}. If the transaction tries to shift an existing certificate token from one real wallet to another, the script flags it as a violation and stops the execution immediately:
+
+\begin{lstlisting}[language=solidity,style=codeStyle]
+    if (from != address(0) && to != address(0)) {
+        revert("SOULBOUND_ERROR: Certificates cannot be transferred");
+    }
+\end{lstlisting}
+
+This code block changes how the asset behaves under the hood, turning it into an untradable, non-transferable certificate that stays permanently bound to the student's wallet identity\cite{nfterc721web}\cite{ahsan2025shikkachain}.
+
+\subsubsection{Token Metadata, IPFS Schemas, and Dynamic Mapping States}
+
+Trying to save heavy files—like high-quality PDF borders, multi-page layout assets, or student academic transcripts—directly into a blockchain's main memory is incredibly expensive and unfeasible\cite{wood2008EthereumYellowPaper}. To avoid these massive network gas costs, blockchain developers use an off-chain storage method called Token Metadata\cite{nfterc721web}\cite{william2018eip721}. Instead of forcing the ledger to save massive raw PDF bytes, the smart contract includes a \texttt{tokenURI()} function. This function simply outputs a web link pointing to a decentralized JSON file stored off-chain\cite{william2018eip721}\cite{openzeppelin2026erc721}.
+
+\input{diagrams/token_uri_metadata}
+
+To keep the data formatted correctly so external NFT indexers can read it, the metadata JSON file follows a straightforward schema layout\cite{william2018eip721}:
+
+\begin{itemize}
+    \item \textbf{School Attributes}: A simple data list containing explicit institutional info, like the student's ID number, their exact degree title, major details, and graduation year.
+
+    \item \textbf{Decentralized File Link}: A fixed IPFS link path (\texttt{ipfs://...}) pointing directly to the original certificate PDF document hosted on the InterPlanetary File System\cite{benet2014ipfs}.
+\end{itemize}
+
+\subsubsection{Dual-Key Cryptographic Ownership \& Hash Verification}
+
+The primary benefit of moving to an NFT setup is the ability to track, prove, and enforce digital records without needing a centralized database room or IT manager\cite{wood2008EthereumYellowPaper}. This verification flow relies entirely on public-key cryptography and basic internal smart contract tables\cite{wood2008EthereumYellowPaper}\cite{natinalIntitute2015fips}:
+
+\begin{enumerate}
+    \item \textbf{Unique Token ID}: Every single certificate gets stamped with its own unique, sequential ID number when the university mints the block\cite{william2018eip721}.
+
+    \item \textbf{SHA-256 Fingerprint}: Before saving anything to the ledger, our system runs the raw certificate PDF data through a hashing tool to get a unique 64-character SHA-256 hash string\cite{natinalIntitute2015fips}. This string serves as an immutable mathematical fingerprint for that unique file\cite{natinalIntitute2015fips}\cite{ahsan2025shikkachain}.
+
+    \item \textbf{Smart Contract Mappings}: The contract saves and cross-references this information using two internal storage lookup dictionaries\cite{wood2008EthereumYellowPaper}\cite{openzeppelin2026erc721}:
+          \begin{itemize}
+              \item \texttt{mapping(string => CertificateDetails) private \_certificatesByHash;}
+              \item \texttt{mapping(uint256 => string) private \_tokenToHash;}
+          \end{itemize}
+\end{enumerate}
+
+This sets up a double-sided lookup network. An employer or verification page can check if a degree is authentic simply by running an uploaded PDF file through a web-browser hashing tool\cite{w3c2025webcrypto} and calling the contract with that string\cite{ether2026ether}. If the blockchain finds a matching, active token linked to that file hash, the degree is instantly verified as authentic\cite{ahsan2025shikkachain}. Because modifying these records requires a cryptographic signature from the university’s private keys, nobody can overwrite, fake, or tamper with the verification data\cite{wood2008EthereumYellowPaper}\cite{ahsan2025shikkachain}. This gives employers complete proof of custody and institutional validity\cite{william2018eip721}\cite{ahsan2025shikkachain}.
