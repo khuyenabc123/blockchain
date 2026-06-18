@@ -1,0 +1,38 @@
+
+
+\begin{longtable}{|m{3.5cm}|m{10.5cm}|}
+    \hline
+    \textbf{Actor} & \textbf{Description}                                                                                                                                     \\
+    \hline
+    \endfirsthead
+
+    Administrator (University Registrar)
+                   & \begin{itemize}
+                         \item Authentication: Connects the university wallet to access the administrative dashboard.
+
+                         \item Issue certificate: Creates digital certificates, uploads certificate data to IPFS, and initiates the NFT minting process through the smart contract
+
+                         \item Revoke certificate: Marks a certificate as revoked when necessary while preserving the original record on the blockchain.
+                     \end{itemize} \\
+    \hline
+
+    Student
+                   & \begin{itemize}
+                         \item Authentication: Connects a personal wallet to access the system.
+
+                         \item View certificate: Accesses personal academic credentials, certificate details, and blockchain verification information.
+                     \end{itemize}                             \\
+    \hline
+
+    Verifier
+                   & \begin{itemize}
+                         \item Verification request: Uses the web interface or AI assistant to verify a certificate.
+
+                         \item Certificate validation: Checks certificate authenticity, ownership information, and verification status using blockchain records and IPFS metadata.
+                     \end{itemize} \\
+    \hline
+
+
+    \caption{Description of system actors and responsibilities}
+    \label{tab:usecase_diagram_explain}
+\end{longtable}

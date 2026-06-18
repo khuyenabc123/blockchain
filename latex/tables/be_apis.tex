@@ -1,0 +1,61 @@
+\begin{longtable}{|m{7.5cm}|m{6.5cm}|}
+    \hline
+    \path{/api/certificates/revoke/:id}
+     & Used to revoke a certificate                                                                                                                 \\
+    \hline
+
+    \path{/api/certificates/all}
+     & Get all certificates data                                                                                                                    \\
+    \hline
+
+    \path{/api/certificates/download/:id}
+     & Download the certificate file with pdfCID                                                                                                    \\
+    \hline
+
+    \path{/api/certificates/verify-by-hash/:hash}
+     & This API used to verify the certificate PDF file is valid or not                                                                             \\
+    \hline
+
+    \path{/api/certificates/issue}
+     & Mint certificate, upload it to IPFS, save a copy of the certificate in MongoDB                                                               \\
+    \hline
+
+    \path{/api/students/admin/register}
+     & API used for admin to create a new student account                                                                                           \\
+    \hline
+
+    \path{/api/students/student/link-wallet}
+     & Save the student's wallet address in the centralized database                                                                                \\
+    \hline
+
+    \path{/api/students/admin/approve-eligibility}
+     & This API for admin approval for a student is enough condition to be graduated, it updates \path{student.isEligibleToGraduate} to \path{true} \\
+    \hline
+
+    \path{/api/students/eligible-graduates}
+     & Return a list of all students with their eligible graduate status                                                                            \\
+    \hline
+
+    \path{/api/students/profile/:studentId}
+     & This API is used to return the student profile information using the Student ID                                                              \\
+    \hline
+
+    \path{/api/students/all-profiles}
+     & This API is used to get the list of all students                                                                                             \\
+    \hline
+
+    \path{/api/students/login}
+     & Login API for student                                                                                                                        \\
+    \hline
+
+    \path{/api/students/change-password}
+     & API for changing the student password                                                                                                        \\
+    \hline
+
+    \path{/api/ai/verify}
+     & API for using AI-agent                                                                                                                       \\
+    \hline
+
+    \caption{Backend APIs}
+    \label{tab:backend_apis}
+\end{longtable}

@@ -1,0 +1,29 @@
+
+
+\begin{longtable}{|m{3.5cm}|m{10.5cm}|}
+
+    \hline
+    Front-end User Interface
+     & On the frontend, we will use React JS, which acts as the client for administration, wallet authentication, and student profile management. It communicates with web3 provider wrappers (Ethers.js) to execute transaction payloads.                                                                                                                                                   \\
+    \hline
+
+    AI Assistant Agent
+     & The AI assistant serves as an intelligent support component that helps users understand certificate information, verification results, and system functionalities. It retrieves relevant data from the backend services and presents responses in a user-friendly manner, reducing the need for users to directly interact with blockchain explorers or technical verification tools. \\
+    \hline
+
+    Central Database
+     & To manage off-chain application state, user authentication records, session configurations, and temporary system operation configurations, we will use MongoDB to store the data in the cloud. It does not store primary authentication data                                                                                                                                          \\
+    \hline
+
+    Blockchain Layer
+     & The cryptographic core is built using Solidity. It serves as the single source of truth, maintaining token registries, validation mappings, and enforcement parameters across distributed validation nodes.                                                                                                                                                                           \\
+    \hline
+
+    Decentralized Storage (IPFS)
+     & A peer-to-peer, content-addressed storage repository hosting the static JSON schemas and cryptographic certificate files                                                                                                                                                                                                                                                              \\
+    \hline
+
+
+    \caption{Architecture diagram explanation}
+    \label{tab:architect_diagram_explain}
+\end{longtable}

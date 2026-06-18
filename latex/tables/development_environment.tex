@@ -1,0 +1,55 @@
+\begin{longtable}{|m{3.5cm}|m{10.5cm}|}
+    \hline
+    Front-end
+    & \begin{itemize}
+        \item \textbf{React (\^{}19.2.6) \& Vite (\^{}8.0.12)}: Used to build a modular, single-page client app. Vite serves as the build engine to achieve rapid Hot Module Replacement (HMR) and optimized bundle rendering.
+
+        \item \textbf{TypeScript ($\sim$6.0.2)}: Enforced static typing constraints across all user views, catching data-type mismatches before compiling.
+
+        \item \textbf{Axios (\^{}1.17.0)}: Used to send asynchronous REST API queries to the backend server.
+
+        \item \textbf{Ant Design (\^{}6.4.3)}: Deployed as the enterprise-grade UI component library.
+    \end{itemize}\\
+    \hline
+
+    Back-end \& Database
+    & \begin{itemize}
+        \item \textbf{Node.js (v24.x) \& Express.js (\^{}5.2.x)}: Used to listen for inbound front-end traffic and process operational request loops.
+        
+        \item \textbf{Typescript (\^{}6.0.x)}: Maintains architectural type-safety uniformity across controller modules and middleware routes.
+        
+        \item \textbf{MongoDB Atlas \& Mongoose ODM (\^{}9.6.x)}: Cloud NoSQL data tier paired with an Object Data Modeling wrapper to manage off-chain application states, student accounts, and certificate information.
+        
+        \item \textbf{Ethers.js (\^{}6.16.0)}: Embedded into the server layer to turn the backend into a Web3 client, opening programmatic channels to interact with local contract functions.
+
+        \item \textbf{nodemailer(\^{}8.0.10)}: Support for admin send the email to student function.
+
+        \item \textbf{pdfkit(\^{}0.18.0)}: Support for create PDF certificate file.
+
+        \item \textbf{qrcode(\^{}1.5.4)}: Support for generating QR code for quick scanning on the certificate.
+
+        \item \textbf{groq-sdk(\^{}1.2.1)}: Groq AI Agent for intepret verification certificate.
+    \end{itemize}\\
+    \hline
+
+    Local Blockchain Execution
+    & \begin{itemize}
+        \item \textbf{Solidity (0.8.20)}: Language to write our project contract.
+    
+        \item \textbf{Hardhat Framework (\^{}2.22.x)}: Deployed as the comprehensive development suite used to compile Solidity contracts, run unit tests, and trace transaction gas limits.
+        
+        \item \textbf{Hardhat Network Node (\texttt{http://127.0.0.1:8545})}: Acts as the localized private JSON-RPC network gateway. The smart contract is hosted entirely in local memory, bypassing public testnet dependencies for rapid testing.
+        
+        \item \textbf{@openzeppelin/contracts (\^{}4.9.x)}: Imported into the contract development loop to provide secure, audited, industry-standard templates for core token properties.
+    \end{itemize}\\
+    \hline
+
+    Decentralized Storage
+    & \begin{itemize}
+        \item \textbf{IPFS via Pinata SDK}: Used to securely host structural metadata JSON schemas and visual certificate templates off-chain via unique CID hashes.
+    \end{itemize}\\
+    \hline
+    
+    \caption{Development Environment}
+    \label{tab:dev_env_explain}
+\end{longtable}

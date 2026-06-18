@@ -1,0 +1,30 @@
+\begin{longtable}{|m{2.8cm}|m{4.0cm}|m{4.0cm}|m{2.5cm}|}
+    \hline
+    \textbf{Scenario}                                                        &
+    \textbf{Input Target File (\texttt{Certificate.pdf})}                    &
+    \textbf{Computed SHA-256 Hexadecimal Hash Signature}                     &
+    \textbf{System Verification Status}                                        \\
+    \hline
+    \endfirsthead
+
+    Baseline                                                                 &
+    \path{Name: Nguyen Thi Hoa, Major: Software Engineering, ...., GPA: 2.3} &
+    \path{8b5a1f6c4d2e...3e7f9a0b1c2}                                        &
+    VALID                                                                      \\
+    \hline
+
+    Tamper Attempt 1                                                         &
+    \path{Name: Nguyen Thi Hoa, Major: Software Engineering, ...., GPA: 3.2} &
+    \path{4f7e2a1b9c0d...a6b7c8d9e0f}                                        &
+    REJECTED (Hash Mismatch)                                                   \\
+    \hline
+
+    Tamper Attempt 2                                                         &
+    \path{Name: Nguyen Thi Hoa, Major: Software EngineerinG, ...., GPA: 3.8} &
+    \path{c9a1b2c3d4e5...f6a7b8c9d0e}                                        &
+    REJECTED (Hash Mismatch)                                                   \\
+    \hline
+
+    \caption{SHA-256 Output Variance Tracing via Minor Payload Alterations}
+    \label{tab:attempt_modify}                                                 \\
+\end{longtable}

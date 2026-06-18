@@ -1,0 +1,26 @@
+\begin{longtable}{|m{3.5cm}|m{10.5cm}|}
+    \hline
+    
+    Development Network Environment 
+    & The current implementation operates within a Hardhat local blockchain environment. Although suitable for development and testing, deployment to a public blockchain network is required before production use.\\
+    \hline
+
+    Wallet Adoption Challenges
+    & The system relies on Ethereum-compatible wallets such as MetaMask. Users unfamiliar with blockchain technologies may require additional guidance during wallet registration and management.\\
+    \hline
+
+    External Service Dependencies
+    & The platform depends on external services such as IPFS pinning providers and AI model providers. Service interruptions may temporarily affect metadata accessibility or AI response generation.\\
+    \hline
+
+    Wallet Ownership Verification
+    & The current prototype captures wallet addresses through MetaMask authorization, but does not perform cryptographic message-signature verification. Future implementations may incorporate challenge-response authentication to provide stronger proof of wallet ownership.\\
+    \hline
+
+    System Authorization
+    & If we wanted to expand this project, we would need to add role authentication, but since the main purpose of the project is to research NFTs, we will not add authorization functionality.\\
+    \hline
+
+    \caption{Project Limitations}
+    \label{tab:project_limitations}
+\end{longtable}

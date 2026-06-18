@@ -1,0 +1,58 @@
+\begin{longtable}{|m{3.5cm}|m{10.5cm}|}
+    \hline
+    
+    Certificate Issuance 
+    & Authorized administrators can generate academic certificates for eligible students. During issuance, the system:
+        \begin{itemize}
+            \item Generates a PDF certificate
+
+            \item Calculates a SHA-256 hash of the generated document
+
+            \item Uploads the certificate PDF to IPFS
+
+            \item Creates and uploads a certificate metadata to IPFS
+
+            \item Mints an NFT certificate through the smart contract.
+
+            \item Stores transaction information in MongoDB
+        \end{itemize}\\
+    \hline
+
+    Certificate Verification 
+    & The verification module successfully retrieves certificate information from blockchain records and associated database entries. Users can verify:
+        \begin{itemize}
+            \item Certificate ownership
+            \item Student information
+            \item Academic degree details
+            \item NFT token identifier
+            \item IPFS metadata references
+            \item Certificate lifecycle status
+        \end{itemize}\\
+    \hline
+
+    Tampering Detection
+    & To evaluate document integrity protection, modified certificate files were tested against the original blockchain records.
+
+    The SHA-256 hash generated from a modified certificate differed from the hash recorded during issuance. Since the hashes no longer matched, the certificate could not be validated against the stored blockchain information.
+    
+    This result demonstrates the effectiveness of cryptographic hashing in detecting unauthorized document modifications.\\
+    \hline
+
+    AI-Assisted Verification
+    & The AI assistant successfully generated natural-language explanations based on verified certificate information supplied by the application. Users were able to ask questions such as:
+        \begin{itemize}
+            \item Is this certificate authentic?
+            
+            \item Who owns this NFT certificate?
+            
+            \item What does the IPFS hash represent?
+            
+            \item What is the current certificate status?
+        \end{itemize}
+        
+        The assistant translated technical blockchain information into user-friendly explanations, improving accessibility for non-technical users.\\
+    \hline
+
+    \caption{Project Results}
+    \label{tab:project_result}
+\end{longtable}

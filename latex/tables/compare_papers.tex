@@ -1,0 +1,59 @@
+\begin{longtable}{|m{3.5cm}|m{5cm}|m{5.5cm}|}
+    \hline
+    \textbf{Authors}                                                                                                                                                                                                                                                       &
+    \textbf{Short Description}                                                                                                                                                                                                                                             &
+    \textbf{Limitations}                                                                                                                                                                                                                                                     \\
+    \hline
+    \endfirsthead
+
+    MIT Media Lab (2016) \cite{mitlab2016blockcerts}                                                                                                                                                                                                                       &
+    \textit{Blockcerts Framework}: Generates local cryptographic hashes of student certificates and batches them into a Merkle Tree structure, publishing the Merkle root hash via a standard transaction string on the public Bitcoin network.                            &
+
+    \begin{enumerate}[nosep, leftmargin=*]
+        \item Exorbitant Transaction Costs: Batching logic on the Bitcoin mainnet incurs volatile and prohibitive network gas fees.
+        \item Lack of Granular Control: Does not natively support independent token identities or programmatic individual revocations.
+    \end{enumerate}                                                                                                                                            \\
+    \hline
+
+    Muhamed et al. (2019) \cite{muhamed2018eductx}                                                                                                                                                                                                                         &
+    \textit{EduCTX System}: A decentralized higher education platform utilizing a private, consortium-based Hyperledger Fabric network to log ECTS credits and diploma metadata on a shared ledger.                                                                        &
+    \begin{enumerate}[nosep, leftmargin=*]
+        \item Interoperability Deficit: Being an isolated private network, external HR platforms and global applications cannot easily access or auto-verify records.
+        \item Scope Limitation: Limited strictly to standard higher education structures; fails to scale for non-academic professional credentials.
+    \end{enumerate}                                                                                                             \\
+    \hline
+
+    Zhao et al. (2022) \cite{xiongfei2022nftcert}                                                                                                                                                                                                                          &
+    \textit{NFTCert System}: A private blockchain-based NFT architecture designed to mask student identities by omitting personal identifiers from on-chain metadata, storing records natively inside localized digital wallets.                                           &
+    \begin{enumerate}[nosep, leftmargin=*]
+        \item Regulatory Barriers: The architecture mandates cryptocurrency-based gas models for transactional execution. This requirement conflicts directly with strict regulatory payment restrictions enforced across multiple international jurisdictions.
+    \end{enumerate}                   \\
+    \hline
+
+    Rahman et al. (2023) \cite{rahman2023verifichain}                                                                                                                                                                                                                      &
+    \textit{Verifi-Chain Protocol}: Integrates an Ethereum public blockchain network with the InterPlanetary File System (IPFS). Digital degree components are compiled off-chain to IPFS to extract unique CIDs, which are recorded as hashes inside public ledger nodes. &
+    \begin{enumerate}[nosep, leftmargin=*]
+        \item Query Latency Vulnerability: The prototype did not implement an active index lookup optimization, creating bottleneck delays during high-volume certificate searches.
+        \item Throughput Evaluation Gaps: Performance metrics concerning network data latency and transaction throughput were omitted.
+    \end{enumerate}                                                                                               \\
+    \hline
+
+    Khati et al. (2023) \cite{khati2023studentcert}                                                                                                                                                                                                                        &
+    \textit{NFT Provenance Sharing Model}: Proposes a unified, single-platform architecture where student course components from multiple separate institutions are aggregated and minted as verifiable NFT metadata elements utilizing IPFS storage layers                &
+    \begin{enumerate}[nosep, leftmargin=*]
+        \item Manual Minting Dependency: The framework relies on the student explicitly logging in to filter courses and manually execute metadata minting requests.
+        \item Lacks AI Automation: Contains no natural language automated verification layers or intelligent assistant interfaces for rapid third-party credential auditing.
+    \end{enumerate}                                                                                                      \\
+    \hline
+
+    Priyadarshini et al. (2025) \cite{rojalina2025verifichain}                                                                                                                                                                                                             &
+    \textit{Hash-Mapped Authentication Architecture}: Implements proxy re-encryption (PRE) paired with a specialized hash function mapping interface to expedite searching algorithms across Ethereum node clusters.                                                       &
+    \begin{enumerate}[nosep, leftmargin=*]
+        \item Integration Rigidity: The software schema exhibits significant compatibility friction when interfacing with legacy university IT ecosystems and traditional data architectures.
+        \item Horizontal Domain Isolation: The cryptographic structure was constructed strictly for healthcare domain records (e.g., medical certificates) and cannot easily scale or adapt to handle academic grading parameters.
+    \end{enumerate}                                                \\
+    \hline
+
+    \caption{Literature Review Summary of Blockchain Frameworks}
+    \label{tab:literature_review}
+\end{longtable}
