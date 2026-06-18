@@ -1,0 +1,61 @@
+\subsection{AI Service Implementation}
+
+The AI service is implemented as a dedicated backend module responsible for communicating with the Groq cloud platform.\\
+
+The system first assembles verified certificate information into a structured context object. This context is then combined with the user's question and submitted to the language model.
+
+\begin{lstlisting}[
+        language=typescript,
+        style=codeStyle
+    ]
+    const context = `
+      Verified Certificate Information
+
+      Student Name: ${certificateData.blockchain.studentName}
+
+      Token ID: ${certificateData.blockchain.tokenId}
+
+      Degree: ${certificateData.blockchain.degree}
+
+      Major: ${certificateData.blockchain.major}
+
+      Wallet: ${certificateData.database.studentWallet}
+
+      IPFS Hash: ${certificateData.blockchain.ipfsHash}
+
+      Status: ${certificateData.database.lifecycleStatus}
+    `;
+\end{lstlisting}
+
+The context is subsequently injected into the LLM request:
+
+\begin{lstlisting}[
+        language=typescript,
+        style=codeStyle
+    ]
+    return await groq.chat.completions.create({
+      model: "llama-3.3-70b-versatile",
+
+      messages: [
+        {
+          role: "system",
+          content: prompt,
+        },
+        {
+          role: "user",
+          content: `
+            Question:
+            ${question}
+
+            Certificate Payload Context:
+            ${context}
+            `,
+        },
+      ],
+
+      temperature: 0.1,
+      stream: true,
+    });
+\end{lstlisting}
+
+The AI-generated response is streamed through the Express backend and rendered progressively within the React chat interface.

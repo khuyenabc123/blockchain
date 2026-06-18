@@ -1,0 +1,61 @@
+\subsection{Prompt Engineering and Hallucination Mitigation}
+
+A common challenge in LLM-based systems is hallucination, where the model generates information not supported by available data.\\
+
+To reduce this risk, the proposed system applies a context-grounding strategy. Instead of allowing the model to independently retrieve blockchain information, verified certificate records are first collected by the application and injected directly into the prompt. The system prompt defines the following operational constraints:
+
+\begin{itemize}
+    \item Explain only the supplied certificate information.
+
+    \item Do not fabricate certificate attributes.
+
+    \item Do not invent ownership records.
+
+    \item Do not generate unsupported verification results.
+
+    \item Clearly indicate when information is unavailable.
+
+    \item Present responses using professional language.
+\end{itemize}
+
+\begin{lstlisting}[
+        language=typescript,
+        style=codeStyle
+    ]
+        const prompt = `You are an NFT Academic Certificate Verification Assistant.
+
+            Responsibilities:
+
+            1. Explain verification results.
+            2. Verify certificate authenticity.
+            3. Explain blockchain records.
+            4. Explain IPFS storage.
+            5. Explain NFT ownership.
+            6. Help users understand certificate status.
+
+            Rules:
+
+            - Never output raw JSON.
+            - Use professional formatting.
+            - If certificate is verified, clearly state VERIFIED.
+            - If information is missing, say so.
+            - Keep responses concise.`;
+    \end{lstlisting}
+
+In addition, the model temperature is configured to 0.1, reducing response randomness and encouraging deterministic outputs.
+
+\begin{center}
+    \begin{tabular}{c}
+        Blockchain Records + Database Records \\
+        $\downarrow$                          \\
+        Verified Certificate Context          \\
+        $\downarrow$                          \\
+        Prompt Construction                   \\
+        $\downarrow$                          \\
+        Llama 3.3 Model                       \\
+        $\downarrow$                          \\
+        Human-Readable Verification Explanation
+    \end{tabular}
+\end{center}
+
+The AI assistant does not verify certificates by itself. Instead, it explains verification results that have already been obtained from blockchain and database records.
